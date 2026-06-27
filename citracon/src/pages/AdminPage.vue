@@ -1,33 +1,15 @@
-<template>
+﻿<template>
   <q-layout view="lHh Lpr lFf">
     <q-page-container>
-<<<<<<< HEAD
-      <q-page class="bg-[#050b18] text-slate-100 min-h-screen py-10 px-4 sm:px-8 relative overflow-hidden">
-    <!-- Ambient Lights -->
-    <div class="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-blue-900/15 blur-[120px] pointer-events-none"></div>
-    <div class="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-red-900/10 blur-[120px] pointer-events-none"></div>
-=======
       <q-page class="bg-slate-50 text-slate-800 min-h-screen py-10 px-4 sm:px-8 relative overflow-hidden">
     <!-- Ambient Lights -->
     <div class="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-blue-100/40 blur-[120px] pointer-events-none"></div>
     <div class="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-red-100/30 blur-[120px] pointer-events-none"></div>
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
 
     <!-- Container -->
     <div class="max-w-7xl mx-auto relative z-10">
       
       <!-- HEADER -->
-<<<<<<< HEAD
-      <div class="flex flex-col justify-center items-center gap-4 mb-10 pb-6 border-b border-slate-800 relative text-center">
-        <div class="w-full">
-          <div class="flex flex-col items-center justify-center text-center">
-            <div class="flex items-center justify-center gap-3">
-              <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
-                Selamat Datang di Halaman Admin Citracon
-              </h1>
-            </div>
-            <p class="text-sm text-slate-400 mt-2">Kelola data katalog produk dan pantau pesanan/leads masuk secara real-time.</p>
-=======
       <div class="flex flex-col justify-center items-center gap-4 mb-10 pb-6 border-b border-slate-200 relative text-center">
         <div class="w-full">
           <div class="flex flex-col items-center justify-center text-center">
@@ -37,17 +19,12 @@
               </h1>
             </div>
             <p class="text-sm text-slate-500 mt-2">Kelola data katalog produk dan pantau pesanan/leads masuk secara real-time.</p>
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
           </div>
         </div>
         <div v-if="isAuthenticated" class="sm:absolute sm:top-2 sm:right-0">
           <button 
             @click="logout" 
-<<<<<<< HEAD
-            class="text-xs bg-[#0c1527] hover:bg-[#12203b] text-slate-300 font-bold px-4 py-2.5 rounded-full border border-slate-800 transition-all cursor-pointer shadow-sm"
-=======
             class="text-xs bg-white hover:bg-slate-100 text-slate-700 font-bold px-4 py-2.5 rounded-full border border-slate-200 transition-all cursor-pointer shadow-sm"
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
           >
             🚪 Keluar
           </button>
@@ -56,40 +33,23 @@
 
       <!-- LOGIN CONTAINER -->
       <div v-if="!isAuthenticated" class="max-w-md mx-auto my-12">
-<<<<<<< HEAD
-        <q-card class="bg-[#0c1527]/85 border border-slate-800 rounded-3xl p-6 shadow-2xl backdrop-blur-md">
-=======
         <q-card class="bg-white border border-slate-200 rounded-3xl p-6 shadow-xl">
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
           <q-card-section class="text-center pb-2">
             <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-[#d21d1d] to-blue-600 flex items-center justify-center text-3xl shadow-lg mb-4">
               🔑
             </div>
-<<<<<<< HEAD
-            <h2 class="text-xl font-bold text-white">Login Admin Panel</h2>
-            <p class="text-xs text-slate-400 mt-1">Masukkan kata sandi admin untuk mengakses dasbor</p>
-=======
             <h2 class="text-xl font-bold text-[#0b1c3f]">Login Admin Panel</h2>
             <p class="text-xs text-slate-500 mt-1">Masukkan kata sandi admin untuk mengakses dasbor</p>
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
           </q-card-section>
 
           <q-card-section class="space-y-4">
             <div>
-<<<<<<< HEAD
-              <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Kata Sandi</label>
-=======
               <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Kata Sandi</label>
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
               <input 
                 v-model="password" 
                 type="password" 
                 @keyup.enter="login"
-<<<<<<< HEAD
-                class="w-full bg-[#050b18] border border-slate-800 rounded-xl px-4 py-3 text-white font-medium focus:outline-none focus:border-[#d21d1d] focus:bg-[#070e1e] transition-all"
-=======
                 class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-[#d21d1d] focus:bg-white transition-all"
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                 placeholder="Masukkan kata sandi..."
               >
             </div>
@@ -98,11 +58,7 @@
           <q-card-section class="pt-2">
             <button 
               @click="login" 
-<<<<<<< HEAD
-              class="w-full bg-[#d21d1d] hover:bg-[#b21818] text-white font-bold py-3 rounded-xl transition-all duration-200 cursor-pointer shadow-lg shadow-red-900/20 active:scale-[0.98]"
-=======
               class="w-full bg-[#d21d1d] hover:bg-[#b21818] text-white font-bold py-3 rounded-xl transition-all duration-200 cursor-pointer shadow-lg shadow-red-900/10 active:scale-[0.98]"
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
             >
               Masuk Dasbor 🚀
             </button>
@@ -114,27 +70,6 @@
       <div v-else>
         <!-- STATS CARDS -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
-<<<<<<< HEAD
-          <div class="bg-[#0c1527]/50 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all flex items-center gap-4 shadow-lg">
-            <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-450 flex items-center justify-center text-2xl font-bold">📦</div>
-            <div>
-              <div class="text-2xl font-black text-white">{{ products.length }}</div>
-              <div class="text-xs text-slate-400 font-medium">Total Produk Katalog</div>
-            </div>
-          </div>
-          <div class="bg-[#0c1527]/50 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all flex items-center gap-4 shadow-lg">
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-450 flex items-center justify-center text-2xl font-bold">📨</div>
-            <div>
-              <div class="text-2xl font-black text-white">{{ leads.length }}</div>
-              <div class="text-xs text-slate-400 font-medium">Total Pesanan Masuk (Leads)</div>
-            </div>
-          </div>
-          <div class="bg-[#0c1527]/50 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all flex items-center gap-4 shadow-lg">
-            <div class="w-12 h-12 rounded-xl bg-red-500/10 text-red-450 flex items-center justify-center text-2xl font-bold">🔥</div>
-            <div>
-              <div class="text-2xl font-black text-white">{{ activeTab === 'leads' ? leads.length : products.length }}</div>
-              <div class="text-xs text-slate-400 font-medium">Item Sedang Dikelola</div>
-=======
           <div class="bg-white border border-slate-200/60 rounded-2xl p-5 hover:border-slate-300 shadow-sm transition-all flex items-center gap-4">
             <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center text-2xl font-bold">📦</div>
             <div>
@@ -154,23 +89,15 @@
             <div>
               <div class="text-2xl font-black text-slate-800">{{ activeTab === 'leads' ? leads.length : products.length }}</div>
               <div class="text-xs text-slate-500 font-medium">Item Sedang Dikelola</div>
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
             </div>
           </div>
         </div>
 
         <!-- TABS HEADER -->
-<<<<<<< HEAD
-        <div class="flex gap-2 p-1 bg-[#0c1527]/85 border border-slate-800 rounded-xl max-w-md mb-8">
-          <button 
-            @click="activeTab = 'leads'"
-            :class="activeTab === 'leads' ? 'bg-[#d21d1d] text-white shadow-md' : 'text-slate-400 hover:text-slate-200'"
-=======
         <div class="flex gap-2 p-1 bg-slate-200/60 border border-slate-300/40 rounded-xl max-w-md mb-8">
           <button 
             @click="activeTab = 'leads'"
             :class="activeTab === 'leads' ? 'bg-[#d21d1d] text-white shadow-md' : 'text-slate-600 hover:text-slate-900'"
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
             class="flex-1 text-[11px] sm:text-xs font-bold py-2.5 rounded-lg transition-all cursor-pointer border-0"
           >
             📨 Pesanan ({{ leads.length }})
@@ -190,13 +117,9 @@
             ⚙️ Tampilan Web
           </button>
         </div>
-<<<<<<< HEAD
-        <div v-if="activeTab === 'leads'" class="bg-white border border-slate-200 rounded-3xl p-6 shadow-xl text-slate-800">
-=======
 
         <!-- LEADS MANAGER TAB -->
         <div v-if="activeTab === 'leads'" class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
           <div class="flex justify-between items-center mb-6">
             <h3 class="text-lg font-bold text-[#0b1c3f] flex items-center gap-2">
               <span>📨</span> Daftar Konsultasi / Pesanan Pelanggan
@@ -217,11 +140,7 @@
           <div v-else class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
             <table class="w-full border-collapse text-left text-xs sm:text-sm text-slate-700">
               <thead>
-<<<<<<< HEAD
-                <tr class="border-b border-slate-200 bg-slate-50 font-bold text-slate-650">
-=======
                 <tr class="border-b border-slate-200 bg-slate-50 font-bold text-slate-600">
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                   <th class="p-4">Tanggal Masuk</th>
                   <th class="p-4">Nama Pelanggan</th>
                   <th class="p-4">Kontak WhatsApp</th>
@@ -267,11 +186,7 @@
         </div>
 
         <!-- PRODUCTS MANAGER TAB -->
-<<<<<<< HEAD
-        <div v-if="activeTab === 'products'" class="bg-white border border-slate-200 rounded-3xl p-6 shadow-xl text-slate-800">
-=======
         <div v-if="activeTab === 'products'" class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
             <h3 class="text-lg font-bold text-[#0b1c3f] flex items-center gap-2">
               <span>📦</span> Daftar Katalog Produk
@@ -284,11 +199,7 @@
             </button>
           </div>
 
-<<<<<<< HEAD
-          <div v-if="products.length === 0" class="text-center py-16 text-slate-400">
-=======
           <div v-if="products.length === 0" class="text-center py-16 text-slate-450">
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
             <span class="text-4xl block mb-3">📭</span>
             Katalog produk kosong. Klik Tambah Produk Baru untuk mengunggah produk pertama.
           </div>
@@ -316,11 +227,7 @@
                 
                 <q-card-section class="p-4">
                   <h4 class="text-base font-bold text-[#0b1c3f] leading-snug">{{ p.name }}</h4>
-<<<<<<< HEAD
-                  <div class="text-xs text-red-650 font-semibold mt-1">{{ p.specs }}</div>
-=======
                   <div class="text-xs text-red-600 font-semibold mt-1">{{ p.specs }}</div>
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                   <p class="text-xs text-slate-600 line-clamp-3 mt-3 leading-relaxed">{{ p.detailed_desc }}</p>
                 </q-card-section>
               </div>
@@ -344,11 +251,7 @@
         </div>
 
         <!-- WEBSITE CONFIGURATION CMS TAB -->
-<<<<<<< HEAD
-        <div v-if="activeTab === 'website'" class="bg-white border border-slate-200 rounded-3xl p-6 shadow-xl space-y-8 text-slate-800">
-=======
         <div v-if="activeTab === 'website'" class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-8">
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
           <div class="flex justify-between items-center pb-4 border-b border-slate-200">
             <h3 class="text-lg font-bold text-[#0b1c3f] flex items-center gap-2">
               <span>⚙️</span> Pengaturan Tampilan & Konten Website
@@ -372,30 +275,14 @@
               </button>
             </div>
             <div class="grid grid-cols-1 gap-6">
-<<<<<<< HEAD
-              <div v-for="(slide, sIdx) in siteSettings.hero_slides" :key="sIdx" class="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 relative">
-                <button @click="removeSlide(sIdx)" class="absolute top-4 right-4 bg-red-500/10 hover:bg-red-500/20 text-red-650 border border-red-500/20 px-2 py-1 rounded text-xs cursor-pointer">
-=======
               <div v-for="(slide, sIdx) in siteSettings.hero_slides" :key="sIdx" class="bg-slate-50 border border-slate-200 rounded-2xl p-4 relative">
                 <button @click="removeSlide(sIdx)" class="absolute top-4 right-4 bg-red-500/10 hover:bg-red-500/20 text-red-600 border border-red-500/20 px-2 py-1 rounded text-xs cursor-pointer">
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                   Hapus
                 </button>
                 <div class="text-xs font-bold text-slate-500 mb-3">Slide #{{ sIdx + 1 }}</div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">URL Gambar (Latar Belakang)</label>
-<<<<<<< HEAD
-                    <input v-model="slide.image" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]" placeholder="Contoh: hero-precast-1.png or URL eksternal">
-                  </div>
-                  <div>
-                    <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Judul Banner (Mendukung HTML)</label>
-                    <input v-model="slide.title" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]" placeholder="Contoh: MEMBANGUN FONDASI, <span class='text-[#d21d1d]'>MENJAMIN KUALITAS</span>">
-                  </div>
-                  <div class="md:col-span-2">
-                    <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Deskripsi Pendek</label>
-                    <textarea v-model="slide.desc" rows="2" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]" placeholder="Tulis deskripsi singkat slide..."></textarea>
-=======
                     <input v-model="slide.image" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:border-[#d21d1d]" placeholder="Contoh: hero-precast-1.png atau URL eksternal">
                   </div>
                   <div>
@@ -405,7 +292,6 @@
                   <div class="md:col-span-2">
                     <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Deskripsi Pendek</label>
                     <textarea v-model="slide.desc" rows="2" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:border-[#d21d1d]" placeholder="Tulis deskripsi singkat slide..."></textarea>
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                   </div>
                 </div>
               </div>
@@ -418,21 +304,6 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="md:col-span-2">
                 <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Judul Profil (Tentang Kami)</label>
-<<<<<<< HEAD
-                <input v-model="siteSettings.profile_title" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]">
-              </div>
-              <div>
-                <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Paragraf Deskripsi 1 (Mendukung HTML)</label>
-                <textarea v-model="siteSettings.profile_desc_1" rows="4" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]"></textarea>
-              </div>
-              <div>
-                <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Paragraf Deskripsi 2 (Mendukung HTML)</label>
-                <textarea v-model="siteSettings.profile_desc_2" rows="4" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]"></textarea>
-              </div>
-              <div class="md:col-span-2">
-                <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Pernyataan Visi</label>
-                <textarea v-model="siteSettings.visi_text" rows="3" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]"></textarea>
-=======
                 <input v-model="siteSettings.profile_title" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-slate-900 text-xs focus:outline-none focus:border-[#d21d1d]">
               </div>
               <div>
@@ -446,7 +317,6 @@
               <div class="md:col-span-2">
                 <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Pernyataan Visi</label>
                 <textarea v-model="siteSettings.visi_text" rows="3" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:border-[#d21d1d]"></textarea>
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
               </div>
               <div class="md:col-span-2 space-y-2">
                 <div class="flex justify-between items-center">
@@ -458,11 +328,7 @@
                 <div class="space-y-2">
                   <div v-for="(misi, mIdx) in siteSettings.misi_items" :key="mIdx" class="flex gap-2 items-center">
                     <span class="text-xs text-slate-500 font-bold">#{{ mIdx + 1 }}</span>
-<<<<<<< HEAD
-                    <input v-model="siteSettings.misi_items[mIdx]" type="text" class="flex-grow bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]">
-=======
                     <input v-model="siteSettings.misi_items[mIdx]" type="text" class="flex-grow bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:border-[#d21d1d]">
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                     <button @click="removeMisi(mIdx)" class="bg-red-500/10 hover:bg-red-500/20 text-red-650 border border-red-500/20 px-2.5 py-2 rounded-xl text-xs cursor-pointer">
                       ✕
                     </button>
@@ -481,34 +347,14 @@
               </button>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<<<<<<< HEAD
-              <div v-for="(item, pIdx) in siteSettings.portfolio_items" :key="pIdx" class="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 relative space-y-3">
-                <button @click="removePortfolioItem(pIdx)" class="absolute top-4 right-4 bg-red-500/10 hover:bg-red-500/20 text-red-650 border border-red-500/20 px-2 py-1 rounded text-xs cursor-pointer">
-=======
               <div v-for="(item, pIdx) in siteSettings.portfolio_items" :key="pIdx" class="bg-slate-50 border border-slate-200 rounded-2xl p-4 relative space-y-3">
                 <button @click="removePortfolioItem(pIdx)" class="absolute top-4 right-4 bg-red-500/10 hover:bg-red-500/20 text-red-600 border border-red-500/20 px-2 py-1 rounded text-xs cursor-pointer">
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                   Hapus
                 </button>
                 <div class="text-xs font-bold text-slate-500">Proyek #{{ pIdx + 1 }}</div>
                 <div class="grid grid-cols-1 gap-2.5">
                   <div>
                     <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-0.5">Kategori</label>
-<<<<<<< HEAD
-                    <input v-model="item.category" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]" placeholder="Contoh: Jalan & Drainase">
-                  </div>
-                  <div>
-                    <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-0.5">Nama Proyek</label>
-                    <input v-model="item.title" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]" placeholder="Contoh: Drainase Tol Trans-Jawa">
-                  </div>
-                  <div>
-                    <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-0.5">Deskripsi Ringkas</label>
-                    <input v-model="item.desc" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]" placeholder="Detail singkat pengadaan...">
-                  </div>
-                  <div>
-                    <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-0.5">URL Gambar Proyek</label>
-                    <input v-model="item.image" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]" placeholder="https://images.unsplash.com/...">
-=======
                     <input v-model="item.category" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-slate-900 text-xs focus:outline-none focus:border-[#d21d1d]" placeholder="Contoh: Jalan & Drainase">
                   </div>
                   <div>
@@ -522,7 +368,6 @@
                   <div>
                     <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-0.5">URL Gambar Proyek</label>
                     <input v-model="item.image" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-slate-900 text-xs focus:outline-none focus:border-[#d21d1d]" placeholder="https://images.unsplash.com/...">
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                   </div>
                 </div>
               </div>
@@ -535,11 +380,7 @@
             <div class="grid grid-cols-1 gap-4">
               <div>
                 <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Sub-judul Maskot</label>
-<<<<<<< HEAD
-                <input v-model="siteSettings.tracon_subtitle" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]">
-=======
                 <input v-model="siteSettings.tracon_subtitle" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:border-[#d21d1d]">
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
               </div>
 
               <!-- Profile Cards -->
@@ -555,13 +396,8 @@
                     <button @click="removeMascotProfileCard(cIdx)" class="absolute top-2 right-2 bg-red-500/10 hover:bg-red-500/20 text-red-650 border border-red-500/20 px-2 py-0.5 rounded text-[10px] cursor-pointer">
                       ✕
                     </button>
-<<<<<<< HEAD
-                    <input v-model="card.title" type="text" class="w-11/12 bg-white border border-slate-200 rounded px-2 py-1 text-slate-900 text-xs font-bold focus:outline-none focus:bg-white focus:border-[#d21d1d]" placeholder="Judul Kartu">
-                    <textarea v-model="card.desc" rows="2" class="w-full bg-white border border-slate-200 rounded px-2 py-1 text-slate-900 text-[11px] focus:outline-none focus:bg-white focus:border-[#d21d1d]" placeholder="Isi deskripsi..."></textarea>
-=======
                     <input v-model="card.title" type="text" class="w-11/12 bg-white border border-slate-200 rounded px-2 py-1 text-slate-900 text-xs font-bold focus:outline-none focus:border-[#d21d1d]" placeholder="Judul Kartu">
                     <textarea v-model="card.desc" rows="2" class="w-full bg-white border border-slate-200 rounded px-2 py-1 text-slate-900 text-[11px] focus:outline-none focus:border-[#d21d1d]" placeholder="Isi deskripsi..."></textarea>
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                   </div>
                 </div>
               </div>
@@ -580,17 +416,10 @@
                       ✕
                     </button>
                     <div class="flex gap-2">
-<<<<<<< HEAD
-                      <input v-model="card.icon" type="text" class="w-10 bg-white border border-slate-200 rounded px-1 py-1 text-slate-900 text-center text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]" placeholder="Ikon">
-                      <input v-model="card.title" type="text" class="flex-grow bg-white border border-slate-200 rounded px-2 py-1 text-slate-900 text-xs font-bold focus:outline-none focus:bg-white focus:border-[#d21d1d]" placeholder="Nama Organ">
-                    </div>
-                    <textarea v-model="card.desc" rows="2" class="w-full bg-white border border-slate-200 rounded px-2 py-1 text-slate-900 text-[11px] focus:outline-none focus:bg-white focus:border-[#d21d1d]" placeholder="Isi deskripsi..."></textarea>
-=======
                       <input v-model="card.icon" type="text" class="w-10 bg-white border border-slate-200 rounded px-1 py-1 text-slate-900 text-center text-xs focus:outline-none focus:border-[#d21d1d]" placeholder="Ikon">
                       <input v-model="card.title" type="text" class="flex-grow bg-white border border-slate-200 rounded px-2 py-1 text-slate-900 text-xs font-bold focus:outline-none focus:border-[#d21d1d]" placeholder="Nama Organ">
                     </div>
                     <textarea v-model="card.desc" rows="2" class="w-full bg-white border border-slate-200 rounded px-2 py-1 text-slate-900 text-[11px] focus:outline-none focus:border-[#d21d1d]" placeholder="Isi deskripsi..."></textarea>
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                   </div>
                 </div>
               </div>
@@ -604,41 +433,6 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Label Sales 1</label>
-<<<<<<< HEAD
-                <input v-model="siteSettings.contact_wa_1_label" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]" placeholder="Contoh: WhatsApp Sales 1">
-              </div>
-              <div>
-                <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Nomor WhatsApp Sales 1 (Kode Negara tanpa '+', misal: 62813...)</label>
-                <input v-model="siteSettings.contact_wa_1_num" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]" placeholder="6281398354196">
-              </div>
-              <div>
-                <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Label Sales 2</label>
-                <input v-model="siteSettings.contact_wa_2_label" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]" placeholder="Contoh: WhatsApp Sales 2">
-              </div>
-              <div>
-                <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Nomor WhatsApp Sales 2</label>
-                <input v-model="siteSettings.contact_wa_2_num" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]" placeholder="6285695660902">
-              </div>
-              <div>
-                <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Username / Link Instagram</label>
-                <input v-model="siteSettings.contact_instagram" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]">
-              </div>
-              <div>
-                <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Username / Link TikTok</label>
-                <input v-model="siteSettings.contact_tiktok" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]">
-              </div>
-              <div class="md:col-span-2">
-                <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Alamat Email Administrasi</label>
-                <input v-model="siteSettings.contact_email" type="email" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]">
-              </div>
-              <div class="md:col-span-2">
-                <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">URL Google Maps Embed (Src Iframe / Share Link)</label>
-                <textarea v-model="siteSettings.contact_maps_url" rows="3" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-[#d21d1d]"></textarea>
-              </div>
-            </div>
-          </div>
-
-=======
                 <input v-model="siteSettings.contact_wa_1_label" type="text" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:outline-none focus:border-[#d21d1d]" placeholder="Contoh: WhatsApp Sales 1">
               </div>
               <div>
@@ -671,33 +465,23 @@
               </div>
             </div>
           </div>
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
           <div class="pt-6 border-t border-slate-200 flex justify-end">
             <button 
               @click="saveSiteSettings" 
               :disabled="isSavingSettings"
-<<<<<<< HEAD
-              class="bg-[#d21d1d] hover:bg-[#b21818] text-white font-extrabold px-8 py-3 rounded-full shadow-lg transition-all cursor-pointer border-0 uppercase tracking-wider disabled:opacity-50"
-=======
               class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-8 py-3 rounded-full shadow-lg transition-all cursor-pointer border-0 uppercase tracking-wider disabled:opacity-50"
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
             >
               <span v-if="isSavingSettings">💾 Menyimpan Perubahan...</span>
               <span v-else>💾 Simpan Semua Pengaturan</span>
             </button>
           </div>
         </div>
-<<<<<<< HEAD
-      </div>
-    </div>
-=======
 
       </div>
 
     </div>
 
     <!-- PRODUCT MANIPULATION MODAL DIALOG -->
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
     <q-dialog v-model="showProductModal" persistent max-width="800px">
       <q-card class="bg-white text-slate-800 border border-slate-200 rounded-3xl w-full max-w-[800px] overflow-hidden shadow-2xl">
         <q-card-section class="bg-slate-50 p-5 flex justify-between items-center border-b border-slate-200">
@@ -706,11 +490,7 @@
           </div>
           <button 
             @click="showProductModal = false" 
-<<<<<<< HEAD
-            class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-550 flex items-center justify-center transition-colors cursor-pointer border-0"
-=======
             class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition-colors cursor-pointer border-0"
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
           >
             ✕
           </button>
@@ -834,11 +614,7 @@
                   <button 
                     type="button" 
                     @click="removeGalleryField(idx)" 
-<<<<<<< HEAD
-                    class="px-3 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-650 font-bold rounded-xl cursor-pointer text-xs"
-=======
                     class="px-3 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-600 font-bold rounded-xl cursor-pointer text-xs"
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                   >
                     ✕
                   </button>
@@ -879,36 +655,20 @@
                 >
               </div>
               <div>
-<<<<<<< HEAD
-                <label class="block text-xs font-semibold text-slate-400 mb-1.5">Metode Cetak</label>
-                <input 
-                  v-model="currentProduct.technical_specs.metode_cetak" 
-                  type="text"
-                  class="w-full bg-[#0c1527] border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#d21d1d] focus:bg-[#0d1628]"
-=======
                 <label class="block text-xs font-semibold text-slate-600 mb-1.5">Metode Cetak</label>
                 <input 
                   v-model="currentProduct.technical_specs.metode_cetak" 
                   type="text"
                   class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-[#d21d1d]"
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                   placeholder="Contoh: Centrifugal Spinning System"
                 >
               </div>
               <div>
-<<<<<<< HEAD
-                <label class="block text-xs font-semibold text-slate-400 mb-1.5">Sertifikasi Teknis</label>
-                <input 
-                  v-model="currentProduct.technical_specs.sertifikasi" 
-                  type="text"
-                  class="w-full bg-[#0c1527] border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#d21d1d] focus:bg-[#0d1628]"
-=======
                 <label class="block text-xs font-semibold text-slate-600 mb-1.5">Sertifikasi Teknis</label>
                 <input 
                   v-model="currentProduct.technical_specs.sertifikasi" 
                   type="text"
                   class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-[#d21d1d]"
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                   placeholder="Contoh: SNI Pracetak, TKDN Terverifikasi"
                 >
               </div>
@@ -921,11 +681,7 @@
             <!-- Size Options Manager -->
             <div>
               <div class="flex justify-between items-center mb-3">
-<<<<<<< HEAD
-                <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Opsi Ukuran / Dimensi (Simulasi Tonase)</label>
-=======
                 <label class="text-xs font-bold text-slate-600 uppercase tracking-wider">Opsi Ukuran / Dimensi (Simulasi Tonase)</label>
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                 <button 
                   type="button" 
                   @click="addSizeOption" 
@@ -936,21 +692,13 @@
               </div>
 
               <div class="space-y-3">
-<<<<<<< HEAD
-                <div v-for="(opt, idx) in currentProduct.size_options" :key="idx" class="flex flex-col sm:flex-row gap-3 p-3 bg-[#050b18] border border-slate-800 rounded-2xl relative">
-=======
                 <div v-for="(opt, idx) in currentProduct.size_options" :key="idx" class="flex flex-col sm:flex-row gap-3 p-3 bg-slate-50 border border-slate-200 rounded-2xl relative">
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                   <div class="flex-1">
                     <label class="block text-[10px] text-slate-500 font-semibold mb-1">Label Ukuran / Dimensi</label>
                     <input 
                       v-model="opt.label" 
                       type="text" 
-<<<<<<< HEAD
-                      class="w-full bg-[#0c1527] border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#d21d1d]"
-=======
                       class="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900 focus:outline-none"
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                       placeholder="Contoh: U-Ditch 30 x 30 x 120 cm"
                     >
                   </div>
@@ -959,11 +707,7 @@
                     <input 
                       v-model.number="opt.weight" 
                       type="number" 
-<<<<<<< HEAD
-                      class="w-full bg-[#0c1527] border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#d21d1d]"
-=======
                       class="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900 focus:outline-none"
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                       placeholder="kg"
                     >
                   </div>
@@ -971,11 +715,7 @@
                     <button 
                       type="button" 
                       @click="removeSizeOption(idx)"
-<<<<<<< HEAD
-                      class="px-3 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 rounded-lg font-bold cursor-pointer text-xs"
-=======
                       class="px-3 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-650 border border-red-500/20 rounded-lg font-bold cursor-pointer text-xs"
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                     >
                       ✕ Hapus
                     </button>
@@ -987,11 +727,7 @@
             <!-- Features List Manager -->
             <div>
               <div class="flex justify-between items-center mb-3">
-<<<<<<< HEAD
-                <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Daftar Keunggulan / Fitur</label>
-=======
                 <label class="text-xs font-bold text-slate-600 uppercase tracking-wider">Daftar Keunggulan / Fitur</label>
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                 <button 
                   type="button" 
                   @click="addFeature" 
@@ -1002,21 +738,13 @@
               </div>
 
               <div class="space-y-3">
-<<<<<<< HEAD
-                <div v-for="(feat, idx) in currentProduct.features" :key="idx" class="flex flex-col gap-2 p-3 bg-[#050b18] border border-slate-800 rounded-2xl relative">
-=======
                 <div v-for="(feat, idx) in currentProduct.features" :key="idx" class="flex flex-col gap-2 p-3 bg-slate-50 border border-slate-200 rounded-2xl relative">
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                   <div>
                     <label class="block text-[10px] text-slate-500 font-semibold mb-1">Judul Keunggulan</label>
                     <input 
                       v-model="feat.title" 
                       type="text" 
-<<<<<<< HEAD
-                      class="w-full bg-[#0c1527] border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#d21d1d]"
-=======
                       class="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900 focus:outline-none"
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                       placeholder="Contoh: Presisi Cetakan Baja"
                     >
                   </div>
@@ -1025,11 +753,7 @@
                     <textarea 
                       v-model="feat.desc" 
                       rows="2"
-<<<<<<< HEAD
-                      class="w-full bg-[#0c1527] border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#d21d1d] resize-none"
-=======
                       class="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900 focus:outline-none resize-none"
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                       placeholder="Tulis keterangan detail dari keunggulan ini..."
                     ></textarea>
                   </div>
@@ -1037,11 +761,7 @@
                     <button 
                       type="button" 
                       @click="removeFeature(idx)"
-<<<<<<< HEAD
-                      class="px-2 py-1 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 rounded-lg font-bold cursor-pointer text-[10px]"
-=======
                       class="px-2 py-1 bg-red-500/10 hover:bg-red-500/20 text-red-650 border border-red-500/20 rounded-lg font-bold cursor-pointer text-[10px]"
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
                     >
                       ✕ Hapus Keunggulan
                     </button>
@@ -1055,27 +775,16 @@
         </q-card-section>
 
         <!-- Save Button -->
-<<<<<<< HEAD
-        <q-card-actions class="bg-[#050b18]/80 p-4 border-t border-slate-800 flex justify-end gap-3">
-          <button 
-            @click="showProductModal = false"
-            class="px-4 py-2.5 rounded-full border border-slate-800 hover:bg-[#12203b] text-slate-350 bg-[#0c1527] text-xs font-bold transition-all cursor-pointer shadow-sm"
-=======
         <q-card-actions class="bg-slate-50 p-4 border-t border-slate-200 flex justify-end gap-3">
           <button 
             @click="showProductModal = false"
             class="px-4 py-2.5 rounded-full border border-slate-200 hover:bg-slate-100 text-slate-700 bg-white text-xs font-bold transition-all cursor-pointer shadow-sm"
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
           >
             Batal
           </button>
           <button 
             @click="saveProduct"
-<<<<<<< HEAD
-            class="px-6 py-2.5 rounded-full bg-[#d21d1d] hover:bg-[#b21818] text-white text-xs font-bold transition-all cursor-pointer shadow-md shadow-red-900/20"
-=======
             class="px-6 py-2.5 rounded-full bg-[#d21d1d] hover:bg-[#b21818] text-white text-xs font-bold transition-all cursor-pointer shadow-md shadow-red-900/10"
->>>>>>> 2438076d32891732b5ee5c8911d9a5089deb4241
           >
             Simpan Perubahan 💾
           </button>
