@@ -7,6 +7,10 @@ const routes = [
       { path: 'produk/:id', component: () => import('pages/ProductDetailPage.vue') }
     ],
   },
+  {
+    path: '/admin',
+    component: () => import('pages/AdminPage.vue')
+  },
 
   // Always leave this as last one,
   // but you can also remove it

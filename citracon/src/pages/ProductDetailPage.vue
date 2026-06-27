@@ -415,9 +415,10 @@
 </template>
 
 <script setup>
-import { ref, computed, watchEffect } from 'vue'
+import { ref, computed, watchEffect, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useQuasar } from 'quasar'
+import { supabase } from 'src/boot/supabase'
 
 const route = useRoute()
 const $q = useQuasar()
@@ -435,210 +436,24 @@ const leadForm = ref({
   address: ''
 })
 
-const productsData = [
-  {
-    id: 1,
-    name: 'Saluran U-Ditch',
-    specs: 'Mutu K-350 / K-400',
-    icon: '🌊',
-    image: '/uditch.jpg',
-    gallery: [
-      '/uditch.jpg',
-      'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800',
-      'https://images.unsplash.com/photo-1581094288338-2314dddb7eed?q=80&w=800',
-      'https://images.unsplash.com/photo-1590069261209-f8e9b8642343?q=80&w=800'
-    ],
-    detailedDesc: 'Saluran air beton pracetak berbentuk huruf U yang dirancang khusus untuk memenuhi standar drainase perkotaan modern, perkerasan jalan raya, perumahan, dan area industri. CITRACon memproduksi U-Ditch presisi tinggi dengan sistem sambungan male-female lock untuk mempercepat pemasangan di lapangan serta meminimalisir risiko kebocoran aliran air.',
-    features: [
-      { title: 'Presisi Cetakan Baja', desc: 'Dibuat dengan cetakan baja khusus (zero-leakage) untuk sambungan presisi tinggi.' },
-      { title: 'Pemasangan Cepat', desc: 'Sistem interlocking memangkas waktu konstruksi hingga 50% dibanding cor di tempat.' },
-      { title: 'Mutu Beton K-350 / K-400', desc: 'Standar kekuatan tinggi yang tahan terhadap beban tanah aktif dan air deras.' },
-      { title: 'Aliran Hidrolis Optimal', desc: 'Permukaan dalam beton licin, meminimalisir penumpukan lumpur dan sampah.' }
-    ],
-    technicalSpecs: {
-      mutu_beton: 'K-350 atau K-400 (SNI 03-6861.1-2002)',
-      panjang_efektif: '1200 mm',
-      sistem_sambungan: 'Male-Female Joint',
-      metode_cetak: 'Wet Cast System dengan getaran mekanis tinggi',
-      sertifikasi: 'SNI Pracetak, TKDN Terverifikasi'
-    },
-    sizeOptions: [
-      { label: 'U-Ditch 30 x 30 x 120 cm', weight: 165 },
-      { label: 'U-Ditch 40 x 40 x 120 cm', weight: 260 },
-      { label: 'U-Ditch 50 x 50 x 120 cm', weight: 385 },
-      { label: 'U-Ditch 60 x 60 x 120 cm', weight: 495 }
-    ]
-  },
-  {
-    id: 2,
-    name: 'Pipa Beton (RCP)',
-    specs: 'Mutu K-450 / Dia. 40-150cm',
-    icon: '⭕',
-    image: '/pipabeton.jpg',
-    gallery: [
-      '/pipabeton.jpg',
-      'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=800',
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800',
-      'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=800'
-    ],
-    detailedDesc: 'Pipa beton bertulang (Reinforced Concrete Pipe) CITRACon dirancang khusus untuk memfasilitasi drainase bawah tanah berkapasitas besar, seperti gorong-gorong jalan tol, saluran air kotor industri, dan penyeberangan jalan. Diproduksi menggunakan mesin spin centrifugal berkecepatan tinggi untuk menghasilkan kepadatan beton maksimal dan ketahanan terhadap beban permukaan yang berat.',
-    features: [
-      { title: 'Kepadatan Sentrifugal', desc: 'Proses produksi spin cast menjamin beton bebas rongga udara sehingga kedap air.' },
-      { title: 'Tulangan Baja Kokoh', desc: 'Dilengkapi tulangan baja wire mesh ganda yang kuat menahan beban gandar jalan raya.' },
-      { title: 'Sambungan Socket-Spigot', desc: 'Memungkinkan penyambungan rapat kedap air dengan opsi penggunaan karet rubber seal.' },
-      { title: 'Tahan Korosi Limbah', desc: 'Cocok untuk saluran air kotor perkotaan dan buangan industri skala menengah.' }
-    ],
-    technicalSpecs: {
-      mutu_beton: 'K-450 (Kompresi Tinggi)',
-      panjang_efektif: '2400 mm',
-      sistem_sambungan: 'Socket & Spigot Joint',
-      metode_cetak: 'Centrifugal / Spinning System',
-      sertifikasi: 'Standar Konstruksi Jalan Tol & Kementerian PU'
-    },
-    sizeOptions: [
-      { label: 'RCP Diameter 40 cm (Tebal 5 cm)', weight: 430 },
-      { label: 'RCP Diameter 60 cm (Tebal 6.5 cm)', weight: 750 },
-      { label: 'RCP Diameter 80 cm (Tebal 8 cm)', weight: 1200 },
-      { label: 'RCP Diameter 100 cm (Tebal 10 cm)', weight: 1850 },
-      { label: 'RCP Diameter 120 cm (Tebal 11.5 cm)', weight: 2600 }
-    ]
-  },
-  {
-    id: 3,
-    name: 'Box Culvert',
-    specs: 'Mutu K-450 / Heavy Duty',
-    icon: '📦',
-    image: '/boxcluivert.jpg',
-    gallery: [
-      '/boxcluivert.jpg',
-      'https://images.unsplash.com/photo-1590069261209-f8e9b8642343?q=80&w=800',
-      'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800',
-      'https://images.unsplash.com/photo-1581094288338-2314dddb7eed?q=80&w=800'
-    ],
-    detailedDesc: 'Box Culvert merupakan produk beton pracetak berbentuk kotak yang berfungsi sebagai saluran drainase tertutup di bawah permukaan tanah atau perlintasan jalan raya. Sangat ideal untuk crossing jalan raya, jembatan bentang pendek, terowongan utilitas kabel/pipa, serta penanganan debit air banjir yang tinggi di perkotaan.',
-    features: [
-      { title: 'Desain Rigid Monolitik', desc: 'Mampu mendistribusikan beban secara merata dari atas perlintasan kendaraan berat.' },
-      { title: 'Dry Connection Praktis', desc: 'Pemasangan antar unit box menggunakan sambungan khusus untuk pengerjaan cepat.' },
-      { title: 'Kapasitas Volume Maksimal', desc: 'Bentuk kotak mengoptimalkan volume aliran air dibanding pipa silinder.' },
-      { title: 'Standar Heavy Duty', desc: 'Sertifikasi uji beban kompresi untuk menahan getaran dan beban gandar ekstrem.' }
-    ],
-    technicalSpecs: {
-      mutu_beton: 'K-450 (Sertifikasi Teknis)',
-      panjang_efektif: '1000 mm',
-      sistem_sambungan: 'Spigot & Socket dengan sealant',
-      metode_cetak: 'Wet Cast Heavy Vibration',
-      sertifikasi: 'SNI 03-6861.1, Rekomendasi Bina Marga'
-    },
-    sizeOptions: [
-      { label: 'Box Culvert 100 x 100 x 100 cm', weight: 1550 },
-      { label: 'Box Culvert 120 x 120 x 100 cm', weight: 1950 },
-      { label: 'Box Culvert 150 x 150 x 100 cm', weight: 2800 },
-      { label: 'Box Culvert 200 x 200 x 100 cm', weight: 4100 }
-    ]
-  },
-  {
-    id: 4,
-    name: 'Buis Beton',
-    specs: 'Diameter 20cm - 100cm',
-    icon: '🕳️',
-    image: '/buistbeton.jpg',
-    gallery: [
-      '/buistbeton.jpg',
-      'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=800',
-      'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=800',
-      'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800'
-    ],
-    detailedDesc: 'Buis Beton (Concrete Pipe non-reinforced) adalah saluran air melingkar tanpa pembesian tulangan. Sangat cocok digunakan untuk sumur resapan air hujan, septic tank perumahan, cakar ayam, saluran drainase sekunder pemukiman, dan gorong-gorong dengan beban kendaraan ringan.',
-    features: [
-      { title: 'Harga Ekonomis', desc: 'Solusi drainase dan penampungan air paling terjangkau dibanding produk beton pracetak lainnya.' },
-      { title: 'Kemudahan Mobilisasi', desc: 'Dapat dipasang secara manual oleh pekerja lapangan tanpa bantuan crane berat.' },
-      { title: 'Pori Resapan Efisien', desc: 'Memiliki pori-pori beton yang optimal untuk penyerapan air sumur resapan.' },
-      { title: 'Opsi Tipe Beragam', desc: 'Tersedia dalam bentuk bulat utuh untuk sumur, maupun belah setengah lingkaran.' }
-    ],
-    technicalSpecs: {
-      mutu_beton: 'K-100 s.d K-225 (Non-Tulang)',
-      panjang_efektif: '1000 mm atau 500 mm',
-      sistem_sambungan: 'Butt Joint (Rata)',
-      metode_cetak: 'Dry Cast Vibration System',
-      sertifikasi: 'Mutu Uji Laboratorium Internal'
-    },
-    sizeOptions: [
-      { label: 'Buis Beton Dia 30 cm x 100 cm', weight: 80 },
-      { label: 'Buis Beton Dia 50 cm x 100 cm', weight: 180 },
-      { label: 'Buis Beton Dia 80 cm x 100 cm', weight: 350 },
-      { label: 'Buis Beton Dia 100 cm x 100 cm', weight: 520 }
-    ]
-  },
-  {
-    id: 5,
-    name: 'Kansteen',
-    specs: 'Tipe DKI, Car Stopper, Jepit',
-    icon: '🚧',
-    image: '/kansteenjalan.jpg',
-    gallery: [
-      '/kansteenjalan.jpg',
-      'https://images.unsplash.com/photo-1590069261209-f8e9b8642343?q=80&w=800',
-      'https://images.unsplash.com/photo-1581094288338-2314dddb7eed?q=80&w=800',
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800'
-    ],
-    detailedDesc: 'Kansteen merupakan beton pracetak yang dipasang di tepi jalan, trotoar, taman, atau area parkir untuk mengunci perkerasan jalan (seperti paving block atau aspal) serta merapikan batas fisik landscape jalan. Kansteen CITRACon memiliki kepadatan dry-press yang sangat baik sehingga tahan terhadap gesekan dan benturan roda kendaraan.',
-    features: [
-      { title: 'Teknologi Dry-Press', desc: 'Diproduksi dengan metode press kering hidrolik bertekanan tinggi untuk beton yang padat.' },
-      { title: 'Tahan Benturan', desc: 'Tidak mudah rompal or retak saat berbenturan dengan roda kendaraan.' },
-      { title: 'Estetika Lanskap Tinggi', desc: 'Sudut dan sisi yang rapi mempercantik tampilan trotoar dan taman.' },
-      { title: 'Instalasi Cepat', desc: 'Ukuran seragam yang mempermudah proses penyusunan linier di lapangan.' }
-    ],
-    technicalSpecs: {
-      mutu_beton: 'K-250 s.d K-300 (Padat Hidrolik)',
-      panjang: '400 mm s.d 600 mm',
-      pilihan_warna: 'Abu-abu Alami Beton',
-      metode_cetak: 'High-Pressure Hydraulic Press Machine',
-      sertifikasi: 'Standar Spesifikasi Jalan Raya Dinas PU'
-    },
-    sizeOptions: [
-      { label: 'Kansteen Jepit 40 x 10 x 20 cm', weight: 18 },
-      { label: 'Kansteen DKI 40 x 15 x 28 cm', weight: 38 },
-      { label: 'Kansteen Car Stopper 60 x 15 x 20 cm', weight: 42 }
-    ]
-  },
-  {
-    id: 6,
-    name: 'Panel Pagar',
-    specs: 'Tinggi Panel 2.4m - 3.2m',
-    icon: '🧱',
-    image: '/panelpagar.jpg',
-    gallery: [
-      '/panelpagar.jpg',
-      'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=800',
-      'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800',
-      'https://images.unsplash.com/photo-1581094288338-2314dddb7eed?q=80&w=800'
-    ],
-    detailedDesc: 'Panel Pagar Beton CITRACon adalah solusi pagar pembatas lahan industri, pergudangan, perumahan, perkebunan, dan lahan komersial yang dipasang dengan sistem sambungan knock-down modular (tiang kolom H dan lembaran panel beton). Memberikan proteksi keamanan yang kokoh, cepat dibangun, dan berbiaya perawatan minimal.',
-    features: [
-      { title: 'Sistem Knock-Down', desc: 'Pemasangan cepat dengan menyisipkan lembaran panel ke dalam celah kolom H.' },
-      { title: 'Tulangan Besi Dalam', desc: 'Lembaran panel diperkuat dengan besi tulangan penarik di dalamnya untuk ketahanan tekuk.' },
-      { title: 'Tahan Cuaca & Awet', desc: 'Tidak keropos dimakan rayap dan tahan karat di segala kondisi cuaca luar ruangan.' },
-      { title: 'Ekonomis & Reusable', desc: 'Pagar dapat dibongkar pasang kembali jika terjadi perubahan batas lahan.' }
-    ],
-    technicalSpecs: {
-      mutu_beton: 'K-250 s.d K-300 (SNI Pagar Beton)',
-      ukuran_panel: '2400 x 400 x 50 mm',
-      tiang_kolom: 'Kolom H-Beam Beton Pracetak',
-      metode_cetak: 'Wet Cast Vertical/Horizontal casting',
-      sertifikasi: 'TKDN Tinggi, Standar Keamanan Kawasan Industri'
-    },
-    sizeOptions: [
-      { label: 'Pagar Tinggi 2.0 m (5 Susun Panel)', weight: 110 },
-      { label: 'Pagar Tinggi 2.4 m (6 Susun Panel)', weight: 132 },
-      { label: 'Pagar Tinggi 2.8 m (7 Susun Panel)', weight: 154 },
-      { label: 'Pagar Tinggi 3.2 m (8 Susun Panel)', weight: 176 }
-    ]
-  }
-]
+const product = ref(null)
 
-const product = computed(() => {
+async function fetchProduct() {
   const id = parseInt(route.params.id)
-  return productsData.find(p => p.id === id)
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .eq('id', id)
+    .single()
+  if (error) {
+    console.error('Error fetching product:', error)
+  } else {
+    product.value = data
+  }
+}
+
+onMounted(() => {
+  fetchProduct()
 })
 
 watchEffect(() => {
@@ -661,12 +476,35 @@ function getWhatsAppLink(phone) {
   return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`
 }
 
-function submitLead() {
+async function submitLead() {
   if (!leadForm.value.name || !leadForm.value.phone || !leadForm.value.address) {
     $q.notify({
       color: 'negative',
       position: 'top',
       message: 'Nama, Nomor WhatsApp, dan Alamat wajib diisi!',
+      icon: 'warning'
+    })
+    return
+  }
+
+  // Insert lead into Supabase leads table
+  const { error } = await supabase
+    .from('leads')
+    .insert([
+      {
+        name: leadForm.value.name,
+        phone: leadForm.value.phone,
+        address: leadForm.value.address,
+        product_name: product.value ? product.value.name : 'Umum'
+      }
+    ])
+
+  if (error) {
+    console.error('Error saving lead to Supabase:', error)
+    $q.notify({
+      color: 'negative',
+      position: 'top',
+      message: 'Gagal mengirim data. Silakan coba lagi nanti.',
       icon: 'warning'
     })
     return
