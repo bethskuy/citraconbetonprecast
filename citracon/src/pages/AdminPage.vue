@@ -1,30 +1,32 @@
-﻿<template>
+<template>
   <q-layout view="lHh Lpr lFf">
     <q-page-container>
-      <q-page class="bg-slate-50 text-slate-800 min-h-screen py-10 px-4 sm:px-8 relative overflow-hidden">
+      <q-page class="bg-gradient-to-br from-slate-100 via-white to-blue-50/30 text-slate-800 min-h-screen py-10 px-4 sm:px-8 relative overflow-hidden">
     <!-- Ambient Lights -->
-    <div class="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-blue-100/40 blur-[120px] pointer-events-none"></div>
-    <div class="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-red-100/30 blur-[120px] pointer-events-none"></div>
+    <div class="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-indigo-100/30 blur-[150px] pointer-events-none"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-red-100/20 blur-[120px] pointer-events-none"></div>
 
     <!-- Container -->
     <div class="max-w-7xl mx-auto relative z-10">
       
       <!-- HEADER -->
-      <div class="flex flex-col justify-center items-center gap-4 mb-10 pb-6 border-b border-slate-200 relative text-center">
+      <div class="flex flex-col justify-center items-center gap-4 mb-10 pb-6 border-b border-slate-200/80 relative text-center">
         <div class="w-full">
           <div class="flex flex-col items-center justify-center text-center">
-            <div class="flex items-center justify-center gap-3">
-              <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0b1c3f]">
-                Selamat Datang di Halaman Admin Citracon
-              </h1>
+            <div class="inline-flex items-center gap-2 bg-red-50 border border-red-200/60 rounded-full px-4 py-1.5 mb-3">
+              <span class="w-2 h-2 rounded-full bg-[#d21d1d] animate-pulse"></span>
+              <span class="text-[11px] font-bold text-[#d21d1d] uppercase tracking-widest">Admin Panel</span>
             </div>
-            <p class="text-sm text-slate-500 mt-2">Kelola data katalog produk dan pantau pesanan/leads masuk secara real-time.</p>
+            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
+              Selamat Datang di <span class="text-[#d21d1d]">CITRACon</span> Admin
+            </h1>
+            <p class="text-sm text-slate-500 mt-2">Kelola katalog produk dan pantau pesanan masuk secara real-time.</p>
           </div>
         </div>
         <div v-if="isAuthenticated" class="sm:absolute sm:top-2 sm:right-0">
           <button 
             @click="logout" 
-            class="text-xs bg-white hover:bg-slate-100 text-slate-700 font-bold px-4 py-2.5 rounded-full border border-slate-200 transition-all cursor-pointer shadow-sm"
+            class="text-xs bg-white hover:bg-red-50 text-slate-600 hover:text-red-600 font-bold px-4 py-2.5 rounded-full border border-slate-200 hover:border-red-200 transition-all cursor-pointer shadow-sm"
           >
             🚪 Keluar
           </button>
@@ -33,148 +35,149 @@
 
       <!-- LOGIN CONTAINER -->
       <div v-if="!isAuthenticated" class="max-w-md mx-auto my-12">
-        <q-card class="bg-white border border-slate-200 rounded-3xl p-6 shadow-xl">
-          <q-card-section class="text-center pb-2">
-            <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-[#d21d1d] to-blue-600 flex items-center justify-center text-3xl shadow-lg mb-4">
+        <div class="bg-white border border-slate-200/80 rounded-3xl p-8 shadow-xl shadow-slate-200/60">
+          <div class="text-center mb-6">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-[#d21d1d] via-rose-500 to-orange-400 flex items-center justify-center text-3xl shadow-lg shadow-red-200 mb-4">
               🔑
             </div>
-            <h2 class="text-xl font-bold text-[#0b1c3f]">Login Admin Panel</h2>
-            <p class="text-xs text-slate-500 mt-1">Masukkan kata sandi admin untuk mengakses dasbor</p>
-          </q-card-section>
-
-          <q-card-section class="space-y-4">
+            <h2 class="text-xl font-extrabold text-slate-900">Login Admin Panel</h2>
+            <p class="text-sm text-slate-500 mt-1">Masukkan kata sandi untuk mengakses dasbor</p>
+          </div>
+          <div class="space-y-4">
             <div>
-              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Kata Sandi</label>
+              <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Kata Sandi</label>
               <input 
                 v-model="password" 
                 type="password" 
                 @keyup.enter="login"
-                class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-[#d21d1d] focus:bg-white transition-all"
+                class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-[#d21d1d]/20 focus:border-[#d21d1d] focus:bg-white transition-all"
                 placeholder="Masukkan kata sandi..."
               >
             </div>
-          </q-card-section>
-
-          <q-card-section class="pt-2">
             <button 
               @click="login" 
-              class="w-full bg-[#d21d1d] hover:bg-[#b21818] text-white font-bold py-3 rounded-xl transition-all duration-200 cursor-pointer shadow-lg shadow-red-900/10 active:scale-[0.98]"
+              class="w-full bg-[#d21d1d] hover:bg-[#b21818] text-white font-extrabold py-3 rounded-xl transition-all duration-200 cursor-pointer shadow-lg shadow-red-200 active:scale-[0.98] mt-2"
             >
               Masuk Dasbor 🚀
             </button>
-          </q-card-section>
-        </q-card>
+          </div>
+        </div>
       </div>
 
       <!-- MAIN CMS DASHBOARD -->
       <div v-else>
         <!-- STATS CARDS -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
-          <div class="bg-white border border-slate-200/60 rounded-2xl p-5 hover:border-slate-300 shadow-sm transition-all flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center text-2xl font-bold">📦</div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
+          <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-300 flex items-center gap-4 border-l-4 border-l-blue-500">
+            <div class="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center text-2xl shadow-sm">📦</div>
             <div>
-              <div class="text-2xl font-black text-slate-800">{{ products.length }}</div>
-              <div class="text-xs text-slate-500 font-medium">Total Produk Katalog</div>
+              <div class="text-2xl font-black text-slate-900">{{ products.length }}</div>
+              <div class="text-xs text-slate-500 font-semibold mt-0.5">Total Produk Katalog</div>
             </div>
           </div>
-          <div class="bg-white border border-slate-200/60 rounded-2xl p-5 hover:border-slate-300 shadow-sm transition-all flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-2xl font-bold">📨</div>
+          <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-300 flex items-center gap-4 border-l-4 border-l-emerald-500">
+            <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center text-2xl shadow-sm">📨</div>
             <div>
-              <div class="text-2xl font-black text-slate-800">{{ leads.length }}</div>
-              <div class="text-xs text-slate-500 font-medium">Total Pesanan Masuk (Leads)</div>
+              <div class="text-2xl font-black text-slate-900">{{ leads.length }}</div>
+              <div class="text-xs text-slate-500 font-semibold mt-0.5">Pesanan Masuk (Leads)</div>
             </div>
           </div>
-          <div class="bg-white border border-slate-200/60 rounded-2xl p-5 hover:border-slate-300 shadow-sm transition-all flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-red-500/10 text-red-500 flex items-center justify-center text-2xl font-bold">🔥</div>
+          <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-300 flex items-center gap-4 border-l-4 border-l-[#d21d1d]">
+            <div class="w-12 h-12 rounded-xl bg-red-50 border border-red-100 text-[#d21d1d] flex items-center justify-center text-2xl shadow-sm">🔥</div>
             <div>
-              <div class="text-2xl font-black text-slate-800">{{ activeTab === 'leads' ? leads.length : products.length }}</div>
-              <div class="text-xs text-slate-500 font-medium">Item Sedang Dikelola</div>
+              <div class="text-2xl font-black text-slate-900">{{ activeTab === 'leads' ? leads.length : products.length }}</div>
+              <div class="text-xs text-slate-500 font-semibold mt-0.5">Item Sedang Dikelola</div>
             </div>
           </div>
         </div>
 
         <!-- TABS HEADER -->
-        <div class="flex gap-2 p-1 bg-slate-200/60 border border-slate-300/40 rounded-xl max-w-md mb-8">
+        <div class="flex gap-1.5 p-1.5 bg-white border border-slate-200 rounded-2xl max-w-lg mb-8 shadow-sm">
           <button 
             @click="activeTab = 'leads'"
-            :class="activeTab === 'leads' ? 'bg-[#d21d1d] text-white shadow-md' : 'text-slate-600 hover:text-slate-900'"
-            class="flex-1 text-[11px] sm:text-xs font-bold py-2.5 rounded-lg transition-all cursor-pointer border-0"
+            :class="activeTab === 'leads' ? 'bg-[#d21d1d] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'"
+            class="flex-1 text-[11px] sm:text-xs font-bold py-2.5 rounded-xl transition-all cursor-pointer border-0"
           >
             📨 Pesanan ({{ leads.length }})
           </button>
           <button 
             @click="activeTab = 'products'"
-            :class="activeTab === 'products' ? 'bg-[#d21d1d] text-white shadow-md' : 'text-slate-400 hover:text-slate-200'"
-            class="flex-1 text-[11px] sm:text-xs font-bold py-2.5 rounded-lg transition-all cursor-pointer border-0"
+            :class="activeTab === 'products' ? 'bg-[#d21d1d] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'"
+            class="flex-1 text-[11px] sm:text-xs font-bold py-2.5 rounded-xl transition-all cursor-pointer border-0"
           >
             📦 Produk ({{ products.length }})
           </button>
           <button 
             @click="activeTab = 'website'"
-            :class="activeTab === 'website' ? 'bg-[#d21d1d] text-white shadow-md' : 'text-slate-400 hover:text-slate-200'"
-            class="flex-1 text-[11px] sm:text-xs font-bold py-2.5 rounded-lg transition-all cursor-pointer border-0"
+            :class="activeTab === 'website' ? 'bg-[#d21d1d] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'"
+            class="flex-1 text-[11px] sm:text-xs font-bold py-2.5 rounded-xl transition-all cursor-pointer border-0"
           >
             ⚙️ Tampilan Web
           </button>
         </div>
 
         <!-- LEADS MANAGER TAB -->
-        <div v-if="activeTab === 'leads'" class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+        <div v-if="activeTab === 'leads'" class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm shadow-slate-100">
           <div class="flex justify-between items-center mb-6">
-            <h3 class="text-lg font-bold text-[#0b1c3f] flex items-center gap-2">
-              <span>📨</span> Daftar Konsultasi / Pesanan Pelanggan
-            </h3>
+            <div>
+              <h3 class="text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center text-base">📨</span>
+                Daftar Konsultasi / Pesanan
+              </h3>
+              <p class="text-xs text-slate-400 mt-1 ml-10">Data masuk dari form konsultasi website</p>
+            </div>
             <button 
               @click="fetchLeads" 
-              class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-3 py-1.5 rounded-lg transition-all cursor-pointer border border-slate-250"
+              class="text-xs bg-slate-50 hover:bg-slate-100 text-slate-600 font-semibold px-3 py-2 rounded-lg transition-all cursor-pointer border border-slate-200 flex items-center gap-1.5"
             >
-              🔄 Refresh Data
+              🔄 Refresh
             </button>
           </div>
 
-          <div v-if="leads.length === 0" class="text-center py-16 text-slate-400">
-            <span class="text-4xl block mb-3">📭</span>
-            Belum ada data konsultasi/pesanan masuk di database.
+          <div v-if="leads.length === 0" class="text-center py-16">
+            <div class="text-5xl mb-4">📭</div>
+            <p class="text-slate-500 font-medium">Belum ada pesanan masuk</p>
+            <p class="text-xs text-slate-400 mt-1">Data akan muncul ketika ada yang mengisi form konsultasi</p>
           </div>
 
-          <div v-else class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
-            <table class="w-full border-collapse text-left text-xs sm:text-sm text-slate-700">
+          <div v-else class="overflow-x-auto rounded-2xl border border-slate-200">
+            <table class="w-full border-collapse text-left text-xs sm:text-sm">
               <thead>
-                <tr class="border-b border-slate-200 bg-slate-50 font-bold text-slate-600">
-                  <th class="p-4">Tanggal Masuk</th>
-                  <th class="p-4">Nama Pelanggan</th>
-                  <th class="p-4">Kontak WhatsApp</th>
-                  <th class="p-4">Produk Ditanyakan</th>
-                  <th class="p-4">Alamat Kirim / Proyek</th>
-                  <th class="p-4 text-center">Aksi</th>
+                <tr class="border-b border-slate-200 bg-slate-50">
+                  <th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Tanggal</th>
+                  <th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Nama</th>
+                  <th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-wider">WhatsApp</th>
+                  <th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Produk</th>
+                  <th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Alamat</th>
+                  <th class="p-4 text-center text-xs font-bold text-slate-500 uppercase tracking-wider">Aksi</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr v-for="lead in leads" :key="lead.id" class="border-b border-slate-100 hover:bg-slate-50 transition-all">
-                  <td class="p-4 text-xs text-slate-500 whitespace-nowrap">{{ formatDate(lead.created_at) }}</td>
-                  <td class="p-4 font-bold text-slate-800">{{ lead.name }}</td>
+              <tbody class="divide-y divide-slate-100">
+                <tr v-for="lead in leads" :key="lead.id" class="hover:bg-slate-50/80 transition-colors">
+                  <td class="p-4 text-xs text-slate-400 whitespace-nowrap font-medium">{{ formatDate(lead.created_at) }}</td>
+                  <td class="p-4 font-bold text-slate-900 text-sm">{{ lead.name }}</td>
                   <td class="p-4">
                     <div class="flex items-center gap-2">
-                      <span class="font-semibold text-slate-700">{{ lead.phone }}</span>
+                      <span class="font-medium text-slate-600 text-xs">{{ lead.phone }}</span>
                       <a 
                         :href="`https://wa.me/${cleanPhone(lead.phone)}?text=${encodeURIComponent('Halo ' + lead.name + ', saya Admin CITRACon menindaklanjuti konsultasi Anda untuk produk ' + lead.product_name)}`" 
                         target="_blank"
-                        class="px-2 py-1 rounded bg-emerald-500/10 text-emerald-600 hover:bg-emerald-500/20 border border-emerald-500/20 transition-colors text-xs font-bold no-underline"
+                        class="px-2.5 py-1 rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition-colors text-xs font-bold no-underline shadow-sm"
                       >
-                        💬 Chat WA
+                        💬 WA
                       </a>
                     </div>
                   </td>
                   <td class="p-4">
-                    <span class="px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-600 border border-blue-500/20 text-xs font-semibold">
+                    <span class="px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100 text-xs font-semibold">
                       {{ lead.product_name || 'Umum' }}
                     </span>
                   </td>
-                  <td class="p-4 max-w-xs truncate text-xs text-slate-500" :title="lead.address">{{ lead.address }}</td>
+                  <td class="p-4 max-w-xs truncate text-xs text-slate-500 font-medium" :title="lead.address">{{ lead.address }}</td>
                   <td class="p-4 text-center">
                     <button 
                       @click="deleteLead(lead.id)"
-                      class="px-2 py-1 rounded bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-600 transition-all font-bold cursor-pointer text-xs"
+                      class="px-3 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 border border-red-200 text-red-600 transition-all font-bold cursor-pointer text-xs"
                     >
                       🗑️ Hapus
                     </button>
@@ -186,80 +189,90 @@
         </div>
 
         <!-- PRODUCTS MANAGER TAB -->
-        <div v-if="activeTab === 'products'" class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+        <div v-if="activeTab === 'products'" class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm shadow-slate-100">
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-            <h3 class="text-lg font-bold text-[#0b1c3f] flex items-center gap-2">
-              <span>📦</span> Daftar Katalog Produk
-            </h3>
+            <div>
+              <h3 class="text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center text-base">📦</span>
+                Daftar Katalog Produk
+              </h3>
+              <p class="text-xs text-slate-400 mt-1 ml-10">Kelola semua produk precast yang ditampilkan di website</p>
+            </div>
             <button 
               @click="openAddProductModal" 
-              class="text-xs bg-[#d21d1d] hover:bg-[#b21818] text-white font-extrabold px-4 py-2.5 rounded-full shadow-md transition-all cursor-pointer border-0 uppercase tracking-wider"
+              class="text-xs bg-[#d21d1d] hover:bg-[#b21818] text-white font-extrabold px-5 py-2.5 rounded-xl shadow-md shadow-red-100 transition-all cursor-pointer border-0 uppercase tracking-wider flex items-center gap-1.5"
             >
-              ➕ Tambah Produk Baru
+              ➕ Tambah Produk
             </button>
           </div>
 
-          <div v-if="products.length === 0" class="text-center py-16 text-slate-450">
-            <span class="text-4xl block mb-3">📭</span>
-            Katalog produk kosong. Klik Tambah Produk Baru untuk mengunggah produk pertama.
+          <div v-if="products.length === 0" class="text-center py-16">
+            <div class="text-5xl mb-4">📭</div>
+            <p class="text-slate-500 font-medium">Katalog produk kosong</p>
+            <p class="text-xs text-slate-400 mt-1">Klik tombol Tambah Produk untuk memulai</p>
           </div>
 
-          <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <q-card 
+          <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div 
               v-for="p in products" 
               :key="p.id" 
-              class="bg-white border border-slate-200 rounded-2xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300"
+              class="bg-white border border-slate-200/80 rounded-2xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-lg hover:border-slate-300 transition-all duration-300 group"
             >
               <div>
-                <div class="h-44 overflow-hidden relative bg-slate-100">
+                <div class="h-44 overflow-hidden relative bg-gradient-to-br from-slate-100 to-slate-200">
                   <img 
                     :src="p.image" 
-                    class="w-full h-full object-cover"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     @error="p.image = 'https://images.unsplash.com/photo-1590069261209-f8e9b8642343?q=80&w=800'"
                   >
-                  <div class="absolute top-3 left-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm border border-slate-200 flex items-center justify-center text-lg shadow-sm">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                  <div class="absolute top-3 left-3 w-9 h-9 rounded-xl bg-white shadow-md flex items-center justify-center text-xl">
                     {{ p.icon || '📦' }}
                   </div>
-                  <div class="absolute bottom-3 right-3 px-2.5 py-1 rounded bg-black/60 backdrop-blur-sm text-xs font-semibold text-slate-300">
-                    ID: {{ p.id }}
+                  <div class="absolute bottom-3 right-3 px-2.5 py-1 rounded-lg bg-black/50 backdrop-blur-sm text-xs font-bold text-white">
+                    ID #{{ p.id }}
                   </div>
                 </div>
                 
-                <q-card-section class="p-4">
-                  <h4 class="text-base font-bold text-[#0b1c3f] leading-snug">{{ p.name }}</h4>
-                  <div class="text-xs text-red-600 font-semibold mt-1">{{ p.specs }}</div>
-                  <p class="text-xs text-slate-600 line-clamp-3 mt-3 leading-relaxed">{{ p.detailed_desc }}</p>
-                </q-card-section>
+                <div class="p-4">
+                  <h4 class="text-sm font-extrabold text-slate-900 leading-snug">{{ p.name }}</h4>
+                  <div class="inline-block text-[11px] text-[#d21d1d] font-bold mt-1 bg-red-50 border border-red-100 px-2 py-0.5 rounded-md">{{ p.specs }}</div>
+                  <p class="text-xs text-slate-500 line-clamp-2 mt-2.5 leading-relaxed">{{ p.detailed_desc }}</p>
+                </div>
               </div>
 
-              <q-card-actions class="p-4 pt-0 flex gap-2">
+              <div class="p-4 pt-0 flex gap-2">
                 <button 
                   @click="openEditProductModal(p)"
-                  class="flex-1 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 font-bold transition-all text-xs cursor-pointer"
+                  class="flex-1 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-100 font-bold transition-all text-xs cursor-pointer"
                 >
-                  ✏️ Edit Detail
+                  ✏️ Edit
                 </button>
                 <button 
                   @click="deleteProduct(p.id)"
-                  class="px-3 py-2 rounded-xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-600 font-bold transition-all text-xs cursor-pointer"
+                  class="px-3 py-2 rounded-xl bg-red-50 hover:bg-red-100 border border-red-100 text-red-600 font-bold transition-all text-xs cursor-pointer"
                 >
                   🗑️
                 </button>
-              </q-card-actions>
-            </q-card>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- WEBSITE CONFIGURATION CMS TAB -->
-        <div v-if="activeTab === 'website'" class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-8">
-          <div class="flex justify-between items-center pb-4 border-b border-slate-200">
-            <h3 class="text-lg font-bold text-[#0b1c3f] flex items-center gap-2">
-              <span>⚙️</span> Pengaturan Tampilan & Konten Website
-            </h3>
+        <div v-if="activeTab === 'website'" class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm shadow-slate-100 space-y-8">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-5 border-b border-slate-100">
+            <div>
+              <h3 class="text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-base">⚙️</span>
+                Pengaturan Tampilan & Konten
+              </h3>
+              <p class="text-xs text-slate-400 mt-1 ml-10">Ubah konten website secara langsung dari sini</p>
+            </div>
             <button 
               @click="saveSiteSettings" 
               :disabled="isSavingSettings"
-              class="text-xs bg-[#d21d1d] hover:bg-[#b21818] text-white font-extrabold px-6 py-2.5 rounded-full shadow-md transition-all cursor-pointer border-0 uppercase tracking-wider disabled:opacity-50"
+              class="text-xs bg-[#d21d1d] hover:bg-[#b21818] text-white font-extrabold px-6 py-2.5 rounded-xl shadow-md shadow-red-100 transition-all cursor-pointer border-0 uppercase tracking-wider disabled:opacity-50 flex items-center gap-2"
             >
               <span v-if="isSavingSettings">💾 Menyimpan...</span>
               <span v-else>💾 Simpan Perubahan</span>
@@ -465,13 +478,14 @@
               </div>
             </div>
           </div>
-          <div class="pt-6 border-t border-slate-200 flex justify-end">
+          <div class="pt-6 border-t border-slate-100 flex justify-between items-center">
+            <p class="text-xs text-slate-400">Perubahan akan langsung diterapkan ke website.</p>
             <button 
               @click="saveSiteSettings" 
               :disabled="isSavingSettings"
-              class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-8 py-3 rounded-full shadow-lg transition-all cursor-pointer border-0 uppercase tracking-wider disabled:opacity-50"
+              class="bg-[#d21d1d] hover:bg-[#b21818] text-white font-extrabold px-8 py-3 rounded-xl shadow-lg shadow-red-100 transition-all cursor-pointer border-0 uppercase tracking-wider disabled:opacity-50 flex items-center gap-2"
             >
-              <span v-if="isSavingSettings">💾 Menyimpan Perubahan...</span>
+              <span v-if="isSavingSettings">💾 Menyimpan...</span>
               <span v-else>💾 Simpan Semua Pengaturan</span>
             </button>
           </div>
