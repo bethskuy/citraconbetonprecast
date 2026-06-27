@@ -1,32 +1,33 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-page-container>
-      <q-page class="bg-gradient-to-br from-slate-100 via-white to-blue-50/30 text-slate-800 min-h-screen py-10 px-4 sm:px-8 relative overflow-hidden">
+      <q-page class="min-h-screen py-10 px-4 sm:px-8 relative overflow-hidden" style="background: linear-gradient(135deg, #080f20 0%, #0b1a38 50%, #0e1f42 100%)">
     <!-- Ambient Lights -->
-    <div class="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-indigo-100/30 blur-[150px] pointer-events-none"></div>
-    <div class="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-red-100/20 blur-[120px] pointer-events-none"></div>
+    <div class="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(210,29,29,0.12) 0%, transparent 70%)"></div>
+    <div class="absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%)"></div>
+    <div class="absolute top-[40%] right-[20%] w-[300px] h-[300px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)"></div>
 
     <!-- Container -->
     <div class="max-w-7xl mx-auto relative z-10">
       
       <!-- HEADER -->
-      <div class="flex flex-col justify-center items-center gap-4 mb-10 pb-6 border-b border-slate-200/80 relative text-center">
+      <div class="flex flex-col justify-center items-center gap-4 mb-10 pb-6 border-b border-white/10 relative text-center">
         <div class="w-full">
           <div class="flex flex-col items-center justify-center text-center">
-            <div class="inline-flex items-center gap-2 bg-red-50 border border-red-200/60 rounded-full px-4 py-1.5 mb-3">
+            <div class="inline-flex items-center gap-2 bg-red-500/10 border border-red-500/30 rounded-full px-4 py-1.5 mb-3">
               <span class="w-2 h-2 rounded-full bg-[#d21d1d] animate-pulse"></span>
-              <span class="text-[11px] font-bold text-[#d21d1d] uppercase tracking-widest">Admin Panel</span>
+              <span class="text-[11px] font-bold text-red-400 uppercase tracking-widest">Admin Panel</span>
             </div>
-            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
-              Selamat Datang di <span class="text-[#d21d1d]">CITRACon</span> Admin
+            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+              Selamat Datang di <span class="text-[#ef4444]">CITRACon</span> Admin
             </h1>
-            <p class="text-sm text-slate-500 mt-2">Kelola katalog produk dan pantau pesanan masuk secara real-time.</p>
+            <p class="text-sm text-slate-400 mt-2">Kelola katalog produk dan pantau pesanan masuk secara real-time.</p>
           </div>
         </div>
         <div v-if="isAuthenticated" class="sm:absolute sm:top-2 sm:right-0">
           <button 
             @click="logout" 
-            class="text-xs bg-white hover:bg-red-50 text-slate-600 hover:text-red-600 font-bold px-4 py-2.5 rounded-full border border-slate-200 hover:border-red-200 transition-all cursor-pointer shadow-sm"
+            class="text-xs bg-white/10 hover:bg-red-500/20 text-slate-300 hover:text-red-400 font-bold px-4 py-2.5 rounded-full border border-white/20 hover:border-red-500/40 transition-all cursor-pointer"
           >
             🚪 Keluar
           </button>
@@ -35,28 +36,30 @@
 
       <!-- LOGIN CONTAINER -->
       <div v-if="!isAuthenticated" class="max-w-md mx-auto my-12">
-        <div class="bg-white border border-slate-200/80 rounded-3xl p-8 shadow-xl shadow-slate-200/60">
+        <div class="rounded-3xl p-8" style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(20px)">
           <div class="text-center mb-6">
-            <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-[#d21d1d] via-rose-500 to-orange-400 flex items-center justify-center text-3xl shadow-lg shadow-red-200 mb-4">
+            <div class="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center text-3xl shadow-2xl mb-4" style="background: linear-gradient(135deg, #d21d1d, #ff6b6b)">
               🔑
             </div>
-            <h2 class="text-xl font-extrabold text-slate-900">Login Admin Panel</h2>
-            <p class="text-sm text-slate-500 mt-1">Masukkan kata sandi untuk mengakses dasbor</p>
+            <h2 class="text-xl font-extrabold text-white">Login Admin Panel</h2>
+            <p class="text-sm mt-1" style="color: rgba(255,255,255,0.5)">Masukkan kata sandi untuk mengakses dasbor</p>
           </div>
           <div class="space-y-4">
             <div>
-              <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Kata Sandi</label>
+              <label class="block text-xs font-bold uppercase tracking-wider mb-2" style="color: rgba(255,255,255,0.6)">Kata Sandi</label>
               <input 
                 v-model="password" 
                 type="password" 
                 @keyup.enter="login"
-                class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-[#d21d1d]/20 focus:border-[#d21d1d] focus:bg-white transition-all"
+                class="w-full rounded-xl px-4 py-3 font-medium focus:outline-none transition-all text-white placeholder-slate-500"
+                style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15)"
                 placeholder="Masukkan kata sandi..."
               >
             </div>
             <button 
               @click="login" 
-              class="w-full bg-[#d21d1d] hover:bg-[#b21818] text-white font-extrabold py-3 rounded-xl transition-all duration-200 cursor-pointer shadow-lg shadow-red-200 active:scale-[0.98] mt-2"
+              class="w-full text-white font-extrabold py-3 rounded-xl transition-all duration-200 cursor-pointer active:scale-[0.98] mt-2"
+              style="background: linear-gradient(135deg, #d21d1d, #b21818); box-shadow: 0 8px 24px rgba(210,29,29,0.35)"
             >
               Masuk Dasbor 🚀
             </button>
@@ -68,48 +71,51 @@
       <div v-else>
         <!-- STATS CARDS -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
-          <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-300 flex items-center gap-4 border-l-4 border-l-blue-500">
-            <div class="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center text-2xl shadow-sm">📦</div>
+          <div class="rounded-2xl p-5 flex items-center gap-4 border transition-all duration-300 hover:scale-[1.02]" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); backdrop-filter: blur(10px)">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style="background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3)">📦</div>
             <div>
-              <div class="text-2xl font-black text-slate-900">{{ products.length }}</div>
-              <div class="text-xs text-slate-500 font-semibold mt-0.5">Total Produk Katalog</div>
+              <div class="text-2xl font-black text-white">{{ products.length }}</div>
+              <div class="text-xs font-semibold mt-0.5" style="color: rgba(255,255,255,0.5)">Total Produk Katalog</div>
             </div>
+            <div class="ml-auto w-1 h-12 rounded-full" style="background: linear-gradient(180deg, #3b82f6, rgba(59,130,246,0))"></div>
           </div>
-          <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-300 flex items-center gap-4 border-l-4 border-l-emerald-500">
-            <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center text-2xl shadow-sm">📨</div>
+          <div class="rounded-2xl p-5 flex items-center gap-4 border transition-all duration-300 hover:scale-[1.02]" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); backdrop-filter: blur(10px)">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3)">📨</div>
             <div>
-              <div class="text-2xl font-black text-slate-900">{{ leads.length }}</div>
-              <div class="text-xs text-slate-500 font-semibold mt-0.5">Pesanan Masuk (Leads)</div>
+              <div class="text-2xl font-black text-white">{{ leads.length }}</div>
+              <div class="text-xs font-semibold mt-0.5" style="color: rgba(255,255,255,0.5)">Pesanan Masuk (Leads)</div>
             </div>
+            <div class="ml-auto w-1 h-12 rounded-full" style="background: linear-gradient(180deg, #10b981, rgba(16,185,129,0))"></div>
           </div>
-          <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-300 flex items-center gap-4 border-l-4 border-l-[#d21d1d]">
-            <div class="w-12 h-12 rounded-xl bg-red-50 border border-red-100 text-[#d21d1d] flex items-center justify-center text-2xl shadow-sm">🔥</div>
+          <div class="rounded-2xl p-5 flex items-center gap-4 border transition-all duration-300 hover:scale-[1.02]" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); backdrop-filter: blur(10px)">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style="background: rgba(210,29,29,0.15); border: 1px solid rgba(210,29,29,0.3)">🔥</div>
             <div>
-              <div class="text-2xl font-black text-slate-900">{{ activeTab === 'leads' ? leads.length : products.length }}</div>
-              <div class="text-xs text-slate-500 font-semibold mt-0.5">Item Sedang Dikelola</div>
+              <div class="text-2xl font-black text-white">{{ activeTab === 'leads' ? leads.length : products.length }}</div>
+              <div class="text-xs font-semibold mt-0.5" style="color: rgba(255,255,255,0.5)">Item Sedang Dikelola</div>
             </div>
+            <div class="ml-auto w-1 h-12 rounded-full" style="background: linear-gradient(180deg, #d21d1d, rgba(210,29,29,0))"></div>
           </div>
         </div>
 
         <!-- TABS HEADER -->
-        <div class="flex gap-1.5 p-1.5 bg-white border border-slate-200 rounded-2xl max-w-lg mb-8 shadow-sm">
+        <div class="flex gap-1.5 p-1.5 rounded-2xl max-w-lg mb-8" style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12)">
           <button 
             @click="activeTab = 'leads'"
-            :class="activeTab === 'leads' ? 'bg-[#d21d1d] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'"
+            :class="activeTab === 'leads' ? 'bg-[#d21d1d] text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-white/10'"
             class="flex-1 text-[11px] sm:text-xs font-bold py-2.5 rounded-xl transition-all cursor-pointer border-0"
           >
             📨 Pesanan ({{ leads.length }})
           </button>
           <button 
             @click="activeTab = 'products'"
-            :class="activeTab === 'products' ? 'bg-[#d21d1d] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'"
+            :class="activeTab === 'products' ? 'bg-[#d21d1d] text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-white/10'"
             class="flex-1 text-[11px] sm:text-xs font-bold py-2.5 rounded-xl transition-all cursor-pointer border-0"
           >
             📦 Produk ({{ products.length }})
           </button>
           <button 
             @click="activeTab = 'website'"
-            :class="activeTab === 'website' ? 'bg-[#d21d1d] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'"
+            :class="activeTab === 'website' ? 'bg-[#d21d1d] text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-white/10'"
             class="flex-1 text-[11px] sm:text-xs font-bold py-2.5 rounded-xl transition-all cursor-pointer border-0"
           >
             ⚙️ Tampilan Web
