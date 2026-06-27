@@ -88,13 +88,11 @@
           Profil Perusahaan
         </div>
         <h2 class="text-3xl md:text-4xl font-extrabold text-[#0b1c3f] tracking-tight mb-6 leading-tight uppercase">
-          Pionir Beton Pracetak Presisi Tinggi untuk Infrastruktur Negeri
+          {{ siteSettings.profile_title }}
         </h2>
-        <p class="text-slate-600 leading-relaxed mb-4 text-base">
-          Didirikan dengan komitmen untuk mempercepat dan memperkuat pembangunan infrastruktur di Indonesia, <strong>CITRACon</strong> hadir sebagai produsen beton pracetak (precast concrete) berkualitas tinggi yang mengutamakan presisi, ketahanan, dan standar mutu nasional (SNI).
+        <p class="text-slate-600 leading-relaxed mb-4 text-base" v-html="siteSettings.profile_desc_1">
         </p>
-        <p class="text-slate-600 leading-relaxed mb-0 text-base">
-          Kami memadukan teknologi cetakan baja presisi tinggi dengan sistem batching plant otomatis untuk menghasilkan produk beton seperti U-Ditch, Box Culvert, Paving Block, dan tiang pancang yang tangguh untuk segala medan proyek konstruksi.
+        <p class="text-slate-600 leading-relaxed mb-0 text-base" v-html="siteSettings.profile_desc_2">
         </p>
       </div>
 
@@ -107,7 +105,7 @@
             <div>
               <h3 class="text-xl font-bold text-white uppercase tracking-wider mb-3">Visi Kami</h3>
               <p class="text-slate-200 text-sm leading-relaxed">
-                Menjadi produsen dan mitra konstruksi beton pracetak utama berskala nasional yang tepercaya, unggul dalam presisi tinggi, inovasi teknologi ramah lingkungan, serta berkomitmen penuh terhadap pembangunan infrastruktur negeri yang berkelanjutan.
+                {{ siteSettings.visi_text }}
               </p>
             </div>
           </div>
@@ -120,10 +118,7 @@
             <div>
               <h3 class="text-xl font-bold text-white uppercase tracking-wider mb-3">Misi Kami</h3>
               <ul class="text-white/95 text-sm leading-relaxed space-y-2 list-disc pl-4">
-                <li>Memproduksi produk beton pracetak bersertifikasi SNI dengan kontrol kualitas (Quality Control) laboratorium yang ketat.</li>
-                <li>Menerapkan cetakan baja presisi tinggi dan sistem otomasi batching plant untuk menjamin akurasi produk.</li>
-                <li>Memberikan pelayanan logistik mandiri yang responsif, andal, dan menjamin ketepatan waktu pengiriman proyek.</li>
-                <li>Mendukung pembangunan hijau dengan efisiensi material dan konsep konstruksi zero-waste.</li>
+                <li v-for="(item, idx) in siteSettings.misi_items" :key="idx">{{ item }}</li>
               </ul>
             </div>
           </div>
@@ -263,31 +258,14 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div v-reveal class="group relative rounded-2xl overflow-hidden h-72 flex flex-col justify-end p-6 reveal shadow-sm hover:shadow-md transition-all duration-300">
-            <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500 opacity-90" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=600')"></div>
+          <div v-reveal v-for="(item, idx) in siteSettings.portfolio_items" :key="idx" 
+               :class="'group relative rounded-2xl overflow-hidden h-72 flex flex-col justify-end p-6 reveal shadow-sm hover:shadow-md transition-all duration-300 ' + (idx === 1 ? 'delay-150' : idx === 2 ? 'delay-300' : '')">
+            <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500 opacity-90" :style="{ backgroundImage: 'url(' + item.image + ')' }"></div>
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent z-10"></div>
             <div class="relative z-20 text-white">
-              <span class="text-[10px] uppercase font-bold text-red-400">Jalan & Drainase</span>
-              <h3 class="text-lg font-bold text-white mt-1">Drainase Tol Trans-Jawa</h3>
-              <p class="text-slate-200 text-xs mt-1">Penyediaan U-Ditch K-400 sepanjang 12 KM di Jawa Tengah.</p>
-            </div>
-          </div>
-          <div v-reveal class="group relative rounded-2xl overflow-hidden h-72 flex flex-col justify-end p-6 reveal delay-150 shadow-sm hover:shadow-md transition-all duration-300">
-            <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500 opacity-90" style="background-image: url('https://images.unsplash.com/photo-1590069261209-f8e9b8642343?q=80&w=600')"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent z-10"></div>
-            <div class="relative z-20 text-white">
-              <span class="text-[10px] uppercase font-bold text-blue-400">Logistik & Industri</span>
-              <h3 class="text-lg font-bold text-white mt-1">Area Logistik Karawang</h3>
-              <p class="text-slate-200 text-xs mt-1">Pemasangan paving block heavy-duty seluas 45.000 m².</p>
-            </div>
-          </div>
-          <div v-reveal class="group relative rounded-2xl overflow-hidden h-72 flex flex-col justify-end p-6 reveal delay-300 shadow-sm hover:shadow-md transition-all duration-300">
-            <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500 opacity-90" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=600')"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent z-10"></div>
-            <div class="relative z-20 text-white">
-              <span class="text-[10px] uppercase font-bold text-red-400">Pekerjaan Publik</span>
-              <h3 class="text-lg font-bold text-white mt-1">Drainase DKI Jakarta</h3>
-              <p class="text-slate-200 text-xs mt-1">Pemasangan Box Culvert K-450 anti amblas untuk kendali banjir.</p>
+              <span :class="idx % 2 === 0 ? 'text-red-400' : 'text-blue-400'" class="text-[10px] uppercase font-bold">{{ item.category }}</span>
+              <h3 class="text-lg font-bold text-white mt-1">{{ item.title }}</h3>
+              <p class="text-slate-200 text-xs mt-1">{{ item.desc }}</p>
             </div>
           </div>
         </div>
@@ -369,7 +347,7 @@
               </div>
               <h2 class="text-2xl md:text-3xl font-bold text-[#0b1c3f] tracking-tight uppercase">MEMPERKENALKAN TRACON</h2>
               <p class="text-slate-500 text-sm mt-2 leading-relaxed">
-                Wajah baru sinergi kekuatan, presisi, dan inovasi untuk masa depan infrastruktur beton precast di Indonesia.
+                {{ siteSettings.tracon_subtitle }}
               </p>
             </div>
 
@@ -395,65 +373,22 @@
 
             <!-- Tab Content: Profile -->
             <div v-if="activeMascotTab === 'profile'" class="space-y-4 transition-all duration-300">
-              <!-- Asal Nama Card -->
-              <div class="p-4 rounded-xl bg-gradient-to-br from-[#0b1c3f] via-[#1e1b4b] to-[#3b0764] text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+              <div v-for="(card, idx) in siteSettings.tracon_profile_cards" :key="idx" 
+                   :class="'p-4 rounded-xl text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all bg-gradient-to-br ' + (idx === 0 ? 'from-[#0b1c3f] via-[#1e1b4b] to-[#3b0764]' : idx === 1 ? 'from-[#d21d1d] via-[#701a75] to-[#3b0764]' : 'from-[#059669] via-[#064e3b] to-[#1e1b4b]')">
                 <div>
-                  <h4 class="font-bold text-white text-sm uppercase tracking-wide">Asal Nama</h4>
-                  <p class="text-xs text-slate-200 mt-1 leading-relaxed">
-                    Nama <strong>TRACON</strong> adalah akronim dari <strong>TRAnsportasi & CONcrete (Beton)</strong>, mewakili kesatuan elemen logistik pengiriman presisi dan produk beton berkualitas tinggi.
-                  </p>
-                </div>
-              </div>
-              
-              <!-- Representasi Nilai Card -->
-              <div class="p-4 rounded-xl bg-gradient-to-br from-[#d21d1d] via-[#701a75] to-[#3b0764] text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
-                <div>
-                  <h4 class="font-bold text-white text-sm uppercase tracking-wide">Representasi Nilai</h4>
-                  <p class="text-xs text-rose-100 mt-1 leading-relaxed">
-                    Dibuat untuk menghidupkan nilai ketangguhan produk precast yang kokoh, tangguh, dan tahan lama berpadu dengan kehangatan serta keprofesionalan layanan CITRACon.
-                  </p>
-                </div>
-              </div>
-
-              <!-- Wajah Masa Depan Card -->
-              <div class="p-4 rounded-xl bg-gradient-to-br from-[#059669] via-[#064e3b] to-[#1e1b4b] text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
-                <div>
-                  <h4 class="font-bold text-white text-sm uppercase tracking-wide">Wajah Masa Depan</h4>
-                  <p class="text-xs text-emerald-100 mt-1 leading-relaxed">
-                    Mewakili pergeseran industri konstruksi menuju modernisasi serba praktis, berstandar tinggi, aman (K3), serta berkelanjutan.
-                  </p>
+                  <h4 class="font-bold text-white text-sm uppercase tracking-wide">{{ card.title }}</h4>
+                  <p class="text-xs text-slate-200 mt-1 leading-relaxed" v-html="card.desc"></p>
                 </div>
               </div>
             </div>
 
-
             <!-- Tab Content: Philosophy -->
             <div v-else class="grid grid-cols-1 sm:grid-cols-3 gap-4 transition-all duration-300">
-              <!-- Helm Card -->
-              <div class="p-4 rounded-xl bg-gradient-to-br from-[#0b1c3f] via-[#1e1b4b] to-[#3b0764] text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
-                <div class="text-2xl mb-2">🪖</div>
-                <h4 class="font-bold text-xs uppercase tracking-wide text-white">Helm</h4>
-                <p class="text-[10px] text-slate-200 mt-1 leading-relaxed">
-                  Mewakili prioritas keselamatan kerja (K3), etos kerja profesional, serta standar kepatuhan tinggi di setiap lini produksi dan pemasangan.
-                </p>
-              </div>
-
-              <!-- Armor Card -->
-              <div class="p-4 rounded-xl bg-gradient-to-br from-[#d21d1d] via-[#701a75] to-[#3b0764] text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
-                <div class="text-2xl mb-2">🛡️</div>
-                <h4 class="font-bold text-xs uppercase tracking-wide text-white">Armor</h4>
-                <p class="text-[10px] text-rose-100 mt-1 leading-relaxed">
-                  Mewakili ketangguhan material beton pracetak, perlindungan maksimal terhadap struktur, serta durabilitas produk jangka panjang.
-                </p>
-              </div>
-
-              <!-- Senyum Jempol Card -->
-              <div class="p-4 rounded-xl bg-gradient-to-br from-[#059669] via-[#064e3b] to-[#1e1b4b] text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
-                <div class="text-2xl mb-2">👍</div>
-                <h4 class="font-bold text-xs uppercase tracking-wide text-white">Senyum Jempol</h4>
-                <p class="text-[10px] text-emerald-100 mt-1 leading-relaxed">
-                  Menandakan pelayanan yang selalu solutif, mengutamakan kepuasan mitra pembangunan, serta hasil proyek konstruksi yang selalu bernilai sempurna.
-                </p>
+              <div v-for="(card, idx) in siteSettings.tracon_philosophy_cards" :key="idx" 
+                   :class="'p-4 rounded-xl text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all bg-gradient-to-br ' + (idx === 0 ? 'from-[#0b1c3f] via-[#1e1b4b] to-[#3b0764]' : idx === 1 ? 'from-[#d21d1d] via-[#701a75] to-[#3b0764]' : 'from-[#059669] via-[#064e3b] to-[#1e1b4b]')">
+                <div class="text-2xl mb-2">{{ card.icon }}</div>
+                <h4 class="font-bold text-xs uppercase tracking-wide text-white">{{ card.title }}</h4>
+                <p class="text-[10px] text-slate-200 mt-1 leading-relaxed">{{ card.desc }}</p>
               </div>
             </div>
           </div>
@@ -489,7 +424,7 @@
               <!-- Mascot Image with bounce animation -->
               <div class="mascot-bounce cursor-pointer select-none" @click="nextMascotSpeech" title="Klik untuk ngobrol!">
                 <img
-                  :src="mascotImages[activeMascotSlide]"
+                  :src="activeMascotImg"
                   alt="TRACON Mascot"
                   class="w-44 h-44 object-contain drop-shadow-xl"
                 />
@@ -707,9 +642,9 @@
                   <q-item-section>
                     <q-item-label class="font-bold text-[#0b1c3f] text-base uppercase tracking-wide">Kontak Layanan</q-item-label>
                     <q-item-label class="text-sm text-slate-600 mt-1.5 leading-relaxed">
-                      WhatsApp 1: <a href="https://wa.me/6281398354196" target="_blank" class="text-slate-600 hover:text-[#d21d1d] font-bold transition-all no-underline">0813-9835-4196</a><br>
-                      WhatsApp 2: <a href="https://wa.me/6285695660902" target="_blank" class="text-slate-600 hover:text-[#d21d1d] font-bold transition-all no-underline">0856-9566-0902</a><br>
-                      Email: <a href="mailto:citraelvanoberkah.adm@gmail.com" class="text-[#0b1c3f] hover:text-[#d21d1d] font-semibold transition-all no-underline">citraelvanoberkah.adm@gmail.com</a>
+                      {{ siteSettings.contact_wa_1_label }}: <a :href="'https://wa.me/' + siteSettings.contact_wa_1_num" target="_blank" class="text-slate-600 hover:text-[#d21d1d] font-bold transition-all no-underline">{{ siteSettings.contact_wa_1_num }}</a><br>
+                      {{ siteSettings.contact_wa_2_label }}: <a :href="'https://wa.me/' + siteSettings.contact_wa_2_num" target="_blank" class="text-slate-600 hover:text-[#d21d1d] font-bold transition-all no-underline">{{ siteSettings.contact_wa_2_num }}</a><br>
+                      Email: <a :href="'mailto:' + siteSettings.contact_email" class="text-[#0b1c3f] hover:text-[#d21d1d] font-semibold transition-all no-underline">{{ siteSettings.contact_email }}</a>
                     </q-item-label>
                   </q-item-section>
                 </q-item>
@@ -717,7 +652,7 @@
  
               <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-100">
                 <a
-                  href="https://maps.google.com/?q=Jl.+Tegal+Danas+No.18a,+Sertajaya,+Kec.+Cikarang+Tim.,+Kabupaten+Bekasi,+Jawa+Barat+17530"
+                  :href="siteSettings.contact_maps_url"
                   target="_blank"
                   class="flex-1 inline-flex justify-center items-center gap-2 px-5 py-3 rounded-full bg-[#0b1c3f] hover:bg-[#152e60] text-white font-bold text-sm tracking-wide shadow-sm hover:shadow-md transition-all duration-300 no-underline text-center"
                 >
@@ -740,7 +675,7 @@
             <div class="w-full rounded-2xl border border-slate-200/60 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 bg-slate-50 flex items-stretch">
               <!-- Real Google Maps Embed with Tegal Danas Bekasi coordinates -->
               <iframe
-                src="https://maps.google.com/maps?q=Jl.%20Tegal%20Danas%20No.18a,%20Sertajaya,%20Kec.%20Cikarang%20Tim.,%20Kabupaten%20Bekasi,%20Jawa%20Barat%2017530&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                :src="siteSettings.contact_maps_url"
                 class="w-full min-h-[350px] border-0"
                 allowfullscreen=""
                 loading="lazy"
@@ -842,8 +777,8 @@
                 <q-icon name="chat" size="20px" />
               </div>
               <div class="text-left">
-                <div class="text-sm font-bold text-white group-hover:text-[#d21d1d] transition-colors">WhatsApp Sales 1</div>
-                <div class="text-xs text-slate-400">0813-9835-4196</div>
+                <div class="text-sm font-bold text-white group-hover:text-[#d21d1d] transition-colors">{{ siteSettings.contact_wa_1_label || 'WhatsApp Sales 1' }}</div>
+                <div class="text-xs text-slate-400">{{ siteSettings.contact_wa_1_num }}</div>
               </div>
             </a>
 
@@ -858,8 +793,8 @@
                 <q-icon name="chat" size="20px" />
               </div>
               <div class="text-left">
-                <div class="text-sm font-bold text-white group-hover:text-[#d21d1d] transition-colors">WhatsApp Sales 2</div>
-                <div class="text-xs text-slate-400">0856-9566-0902</div>
+                <div class="text-sm font-bold text-white group-hover:text-[#d21d1d] transition-colors">{{ siteSettings.contact_wa_2_label || 'WhatsApp Sales 2' }}</div>
+                <div class="text-xs text-slate-400">{{ siteSettings.contact_wa_2_num }}</div>
               </div>
             </a>
           </div>
@@ -879,14 +814,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useQuasar } from 'quasar'
+import { supabase } from 'src/boot/supabase'
 
 const $q = useQuasar()
 
 // Auto-rotate TRACON speech bubble every 3 seconds
 let speechInterval = null
 onMounted(() => {
+  fetchProducts()
+  fetchSiteSettings()
   speechInterval = setInterval(() => {
     activeSpeechIdx.value = (activeSpeechIdx.value + 1) % traconspeech.length
     activeMascotSlide.value = (activeMascotSlide.value + 1) % mascotImages.length
@@ -916,23 +854,48 @@ const vReveal = {
 
 // Carousel State
 const activeSlide = ref(0)
-const slides = ref([
-  {
-    image: 'hero-precast-1.png',
-    title: 'MEMBANGUN FONDASI, <span class="text-[#d21d1d]">MENJAMIN KUALITAS</span>',
-    desc: 'Citracon Beton Precast menyediakan produk beton precast berkualitas tinggi untuk mendukung kebutuhan konstruksi dan infrastruktur di seluruh Indonesia.'
-  },
-  {
-    image: 'hero-precast-2.png',
-    title: 'MUTU TINGGI <span class="text-[#d21d1d]">STANDAR NASIONAL</span>',
-    desc: 'Setiap cetakan beton diproduksi menggunakan cetakan baja presisi tinggi dan sistem otomasi laboratorium kuat tekan K-500.'
-  },
-  {
-    image: 'hero-precast-3.png',
-    title: 'PENGIRIMAN CEPAT <span class="text-[#d21d1d]">TEPAT WAKTU</span>',
-    desc: 'Menjamin ketepatan waktu pengiriman proyek dengan armada mixer dan logistik mandiri yang andal.'
+const slides = computed(() => siteSettings.value.hero_slides || [])
+
+// Site Settings State (100% database-driven)
+const siteSettings = ref({
+  hero_slides: [],
+  profile_title: '',
+  profile_desc_1: '',
+  profile_desc_2: '',
+  visi_text: '',
+  misi_items: [],
+  portfolio_items: [],
+  tracon_subtitle: '',
+  tracon_profile_cards: [],
+  tracon_philosophy_cards: [],
+  contact_wa_1_label: '',
+  contact_wa_1_num: '',
+  contact_wa_2_label: '',
+  contact_wa_2_num: '',
+  contact_instagram: '',
+  contact_tiktok: '',
+  contact_email: '',
+  contact_maps_url: ''
+})
+
+async function fetchSiteSettings() {
+  const { data, error } = await supabase
+    .from('site_settings')
+    .select('*')
+    .eq('id', 1)
+    .single()
+  if (error) {
+    console.error('Error fetching site settings:', error)
+  } else if (data) {
+    siteSettings.value = data
+    
+    // Update dynamic WA URLs based on settings
+    const wa1Msg = encodeURIComponent('Halo Sales CITRACon, saya ingin bertanya mengenai produk beton precast.')
+    const wa2Msg = encodeURIComponent('Halo Sales CITRACon, saya ingin bertanya mengenai produk beton precast.')
+    waSales1Url.value = `https://wa.me/${data.contact_wa_1_num}?text=${wa1Msg}`
+    waSales2Url.value = `https://wa.me/${data.contact_wa_2_num}?text=${wa2Msg}`
   }
-])
+}
 
 function prevSlide() {
   activeSlide.value = activeSlide.value === 0 ? slides.value.length - 1 : activeSlide.value - 1
@@ -968,12 +931,13 @@ function openWhatsAppWithChoice(customMessage = '') {
 const activeMascotTab = ref('profile')
 const activeMascotSlide = ref(0)
 const mascotImages = [
-  '/tracon.png',
-  '/tracon2.png',
-  '/tracon3.png',
-  '/tracon4.png',
-  '/tracon5.png'
+  'tracon.png',
+  'tracon2.png',
+  'tracon3.png',
+  'tracon4.png',
+  'tracon5.png'
 ]
+const activeMascotImg = computed(() => mascotImages[activeMascotSlide.value])
 
 function prevMascotSlide() {
   activeMascotSlide.value = activeMascotSlide.value === 0 ? mascotImages.length - 1 : activeMascotSlide.value - 1
@@ -1001,76 +965,49 @@ function nextMascotSpeech() {
   activeMascotSlide.value = (activeMascotSlide.value + 1) % mascotImages.length
 }
 
-const products = ref([
-  {
-    id: 1,
-    name: 'Saluran U-Ditch',
-    desc: 'Saluran air beton pracetak berbentuk huruf U yang dirancang khusus untuk drainase perkotaan dan jalan raya.',
-    icon: '🌊',
-    specs: 'Mutu K-350 / K-400',
-    accentBg: 'bg-[#0b1c3f]',
-    accentText: 'text-red-400',
-    image: '/uditch.jpg'
-  },
-  {
-    id: 2,
-    name: 'Pipa Beton (RCP)',
-    desc: 'Pipa beton bertulang (Reinforced Concrete Pipe) presisi tinggi untuk saluran air kotor dan drainase bawah tanah berdiameter besar.',
-    icon: '⭕',
-    specs: 'Mutu K-450 / Dia. 40-150cm',
-    accentBg: 'bg-[#d21d1d]',
-    accentText: 'text-red-400',
-    image: '/pipabeton.jpg'
-  },
-  {
-    id: 3,
-    name: 'Box Culvert',
-    desc: 'Beton pracetak persegi panjang untuk saluran pembuangan air di bawah jalan dengan beban lalu lintas berat.',
-    icon: '📦',
-    specs: 'Mutu K-450 / Heavy Duty',
-    accentBg: 'bg-slate-900',
-    accentText: 'text-red-400',
-    image: '/boxcluivert.jpg'
-  },
-  {
-    id: 4,
-    name: 'Buis Beton',
-    desc: 'Saluran air melingkar tanpa tulang untuk sumur resapan, septictank, maupun saluran drainase lingkungan perumahan.',
-    icon: '🕳️',
-    specs: 'Diameter 20cm - 100cm',
-    accentBg: 'bg-[#0b1c3f]',
-    accentText: 'text-red-400',
-    image: '/buistbeton.jpg'
-  },
-  {
-    id: 5,
-    name: 'Kansteen',
-    desc: 'Beton pengunci tepi jalan raya, trotoar, taman, maupun area parkir untuk kerapian dan keamanan batas jalan.',
-    icon: '🚧',
-    specs: 'Tipe DKI, Car Stopper, Jepit',
-    accentBg: 'bg-[#d21d1d]',
-    accentText: 'text-red-400',
-    image: '/kansteenjalan.jpg'
-  },
-  {
-    id: 6,
-    name: 'Panel Pagar',
-    desc: 'Pagar beton precast knock-down modular pembatas lahan industri, perumahan, dan komersial secara cepat & kokoh.',
-    icon: '🧱',
-    specs: 'Tinggi Panel 2.4m - 3.2m',
-    accentBg: 'bg-slate-900',
-    accentText: 'text-red-400',
-    image: '/panelpagar.jpg'
+const products = ref([])
+
+async function fetchProducts() {
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .order('id', { ascending: true })
+  if (error) {
+    console.error('Error fetching products:', error)
+  } else {
+    products.value = data
   }
-])
+}
 
 
 // Submit Lead
-function submitLead() {
+async function submitLead() {
   if (!leadForm.value.name || !leadForm.value.phone) {
     $q.notify({
       type: 'negative',
       message: 'Harap isi nama dan nomor telepon Anda.',
+      position: 'top'
+    })
+    return
+  }
+
+  // Insert lead into Supabase leads table
+  const { error } = await supabase
+    .from('leads')
+    .insert([
+      {
+        name: leadForm.value.name,
+        phone: leadForm.value.phone,
+        address: 'Konsultasi Umum (Homepage)',
+        product_name: 'Umum'
+      }
+    ])
+
+  if (error) {
+    console.error('Error saving lead to Supabase:', error)
+    $q.notify({
+      type: 'negative',
+      message: 'Gagal mengirim data. Silakan coba lagi nanti.',
       position: 'top'
     })
     return

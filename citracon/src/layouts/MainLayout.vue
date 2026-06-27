@@ -296,10 +296,10 @@
             <p class="text-xs text-slate-300 leading-relaxed max-w-sm">
               Produsen dan mitra konstruksi beton pracetak (precast concrete) utama berskala nasional bersertifikasi SNI. Berkomitmen menghadirkan presisi tinggi, kekuatan, dan ketahanan untuk infrastruktur Indonesia.
             </p>
-            <div class="flex items-center gap-3 pt-2">
+             <div class="flex items-center gap-3 pt-2">
               <!-- Instagram -->
               <a
-                href="https://instagram.com/citraconbetonprecast"
+                :href="siteSettings.contact_instagram"
                 target="_blank"
                 class="w-9 h-9 rounded-full bg-slate-800 hover:bg-[#d21d1d] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 no-underline"
                 title="Instagram Citracon"
@@ -310,7 +310,7 @@
               </a>
               <!-- TikTok -->
               <a
-                href="https://tiktok.com/@cvcitraelvanoberkah"
+                :href="siteSettings.contact_tiktok"
                 target="_blank"
                 class="w-9 h-9 rounded-full bg-slate-800 hover:bg-[#d21d1d] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 no-underline"
                 title="TikTok Citracon"
@@ -368,7 +368,7 @@
                   <q-icon name="chat" size="16px" class="text-slate-300" />
                 </q-item-section>
                 <q-item-section class="text-slate-300">
-                  <a href="https://wa.me/6281398354196" target="_blank" class="text-slate-300 hover:text-white transition-all duration-300 no-underline hover-underline-left inline-block w-fit self-start">0813-9835-4196</a>
+                  <a :href="'https://wa.me/' + siteSettings.contact_wa_1_num" target="_blank" class="text-slate-300 hover:text-white transition-all duration-300 no-underline hover-underline-left inline-block w-fit self-start">{{ siteSettings.contact_wa_1_num }}</a>
                 </q-item-section>
               </q-item>
 
@@ -378,7 +378,7 @@
                   <q-icon name="chat" size="16px" class="text-slate-300" />
                 </q-item-section>
                 <q-item-section class="text-slate-300">
-                  <a href="https://wa.me/6285695660902" target="_blank" class="text-slate-300 hover:text-white transition-all duration-300 no-underline hover-underline-left inline-block w-fit self-start">0856-9566-0902</a>
+                  <a :href="'https://wa.me/' + siteSettings.contact_wa_2_num" target="_blank" class="text-slate-300 hover:text-white transition-all duration-300 no-underline hover-underline-left inline-block w-fit self-start">{{ siteSettings.contact_wa_2_num }}</a>
                 </q-item-section>
               </q-item>
 
@@ -388,7 +388,7 @@
                   <q-icon name="mail" size="16px" class="text-slate-300" />
                 </q-item-section>
                 <q-item-section class="text-slate-300">
-                  <a href="mailto:citraelvanoberkah.adm@gmail.com" class="text-slate-300 hover:text-white transition-all duration-300 no-underline hover-underline-left inline-block w-fit self-start">citraelvanoberkah.adm@gmail.com</a>
+                  <a :href="'mailto:' + siteSettings.contact_email" class="text-slate-300 hover:text-white transition-all duration-300 no-underline hover-underline-left inline-block w-fit self-start">{{ siteSettings.contact_email }}</a>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -541,9 +541,9 @@
           <p class="text-slate-300 text-xs mb-6">Silakan pilih salah satu layanan WhatsApp Sales kami untuk konsultasi:</p>
 
           <div class="space-y-4">
-            <!-- Sales 1 Button -->
+             <!-- Sales 1 Button -->
             <a
-              href="https://wa.me/6281398354196"
+              :href="'https://wa.me/' + siteSettings.contact_wa_1_num"
               target="_blank"
               class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#d21d1d]/50 transition-all duration-300 no-underline cursor-pointer group"
               @click="showWhatsAppChoice = false"
@@ -552,14 +552,14 @@
                 <q-icon name="chat" size="20px" />
               </div>
               <div class="text-left">
-                <div class="text-sm font-bold text-white group-hover:text-[#d21d1d] transition-colors">WhatsApp Sales 1</div>
-                <div class="text-xs text-slate-400">0813-9835-4196</div>
+                <div class="text-sm font-bold text-white group-hover:text-[#d21d1d] transition-colors">{{ siteSettings.contact_wa_1_label || 'WhatsApp Sales 1' }}</div>
+                <div class="text-xs text-slate-400">{{ siteSettings.contact_wa_1_num }}</div>
               </div>
             </a>
 
             <!-- Sales 2 Button -->
             <a
-              href="https://wa.me/6285695660902"
+              :href="'https://wa.me/' + siteSettings.contact_wa_2_num"
               target="_blank"
               class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#d21d1d]/50 transition-all duration-300 no-underline cursor-pointer group"
               @click="showWhatsAppChoice = false"
@@ -568,8 +568,8 @@
                 <q-icon name="chat" size="20px" />
               </div>
               <div class="text-left">
-                <div class="text-sm font-bold text-white group-hover:text-[#d21d1d] transition-colors">WhatsApp Sales 2</div>
-                <div class="text-xs text-slate-400">0856-9566-0902</div>
+                <div class="text-sm font-bold text-white group-hover:text-[#d21d1d] transition-colors">{{ siteSettings.contact_wa_2_label || 'WhatsApp Sales 2' }}</div>
+                <div class="text-xs text-slate-400">{{ siteSettings.contact_wa_2_num }}</div>
               </div>
             </a>
           </div>
@@ -592,6 +592,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { supabase } from 'src/boot/supabase'
 
 const route = useRoute()
 const router = useRouter()
@@ -681,9 +682,34 @@ async function smoothScrollTo(anchorId) {
   }
 }
 
+const siteSettings = ref({
+  contact_wa_1_label: '',
+  contact_wa_1_num: '',
+  contact_wa_2_label: '',
+  contact_wa_2_num: '',
+  contact_instagram: '',
+  contact_tiktok: '',
+  contact_email: '',
+  contact_maps_url: ''
+})
+
+async function fetchSiteSettings() {
+  const { data, error } = await supabase
+    .from('site_settings')
+    .select('*')
+    .eq('id', 1)
+    .single()
+  if (error) {
+    console.error('Error fetching site settings in layout:', error)
+  } else if (data) {
+    siteSettings.value = data
+  }
+}
+
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
   handleScroll() // Initialize state in case page is loaded already scrolled
+  fetchSiteSettings()
 })
 
 onUnmounted(() => {
