@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://citraconbetonprecast.vercel.app/sitemap.xml
