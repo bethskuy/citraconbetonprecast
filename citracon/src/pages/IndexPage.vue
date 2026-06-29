@@ -233,9 +233,14 @@
                 <h3 class="text-lg font-bold text-white mb-2 uppercase tracking-wide">
                   {{ product.name }}
                 </h3>
-                <p class="text-slate-300 text-xs leading-relaxed mb-6">
-                  {{ product.desc }}
+                <!-- Deskripsi singkat produk -->
+                <p class="text-slate-300 text-xs leading-relaxed mb-4">
+                  {{ product.desc || getProductDesc(product.name) }}
                 </p>
+                <!-- Spek singkat jika ada -->
+                <div v-if="product.specs" class="inline-block px-2 py-0.5 rounded bg-white/10 border border-white/20 text-[10px] text-slate-300 font-semibold mb-2">
+                  {{ product.specs }}
+                </div>
               </div>
               <div class="pt-4 border-t border-white/15">
                 <router-link :to="'/produk/' + product.id" class="w-full text-xs bg-[#d21d1d] hover:bg-[#b21818] text-white font-bold py-2.5 rounded-full shadow-sm transition-all cursor-pointer text-center block no-underline">
@@ -248,7 +253,7 @@
       </div>
 
       <!-- Project Portfolio Section -->
-      <div id="galeri-kerja" class="mb-16">
+      <div id="galeri-kerja" class="mb-12">
         <div class="text-center max-w-2xl mx-auto mb-10">
           <div class="inline-block px-4 py-1.5 bg-[#d21d1d]/10 text-[#d21d1d] text-xs font-bold uppercase tracking-wider rounded-full mb-3">
             Galeri Kerja
@@ -271,33 +276,8 @@
         </div>
       </div>
 
-      <!-- Klien Kami Section -->
-      <div id="klien" v-reveal class="rounded-3xl border border-slate-100 bg-white p-8 md:p-12 relative overflow-hidden mb-16 reveal transition-all duration-300 shadow-md text-slate-800 text-center">
-        <div class="max-w-3xl mx-auto mb-8">
-          <div class="inline-block px-4 py-1.5 bg-[#d21d1d]/10 text-[#d21d1d] text-xs font-bold uppercase tracking-wider rounded-full mb-3">
-            Klien Kami
-          </div>
-          <h2 class="text-2xl md:text-3xl font-bold text-[#0b1c3f] tracking-tight uppercase">Kemitraan Terpercaya</h2>
-          <p class="text-slate-500 text-sm mt-3 leading-relaxed">
-            Kami bangga telah dipercaya oleh berbagai perusahaan kontraktor terkemuka dan instansi nasional untuk mendukung kesuksesan pembangunan infrastruktur di Indonesia.
-          </p>
-        </div>
-        
-        <!-- Client Logos Row -->
-        <div class="flex flex-wrap items-center justify-center gap-12 mt-6">
-          <!-- Brantas Abipraya -->
-          <div class="flex items-center justify-center bg-slate-50 border border-slate-100 rounded-2xl p-4 w-52 h-24 shadow-sm hover:shadow-md hover:border-slate-200 transition-all duration-300 group cursor-pointer">
-            <img src="/brantas.png" alt="Brantas Abipraya" class="max-h-12 w-auto object-contain transition-all duration-300 group-hover:scale-105" />
-          </div>
-          <!-- Agra Budi -->
-          <div class="flex items-center justify-center bg-slate-50 border border-slate-100 rounded-2xl p-4 w-52 h-24 shadow-sm hover:shadow-md hover:border-slate-200 transition-all duration-300 group cursor-pointer">
-            <img src="/agra.png" alt="Agra Budi" class="max-h-12 w-auto object-contain transition-all duration-300 group-hover:scale-105" />
-          </div>
-        </div>
-      </div>
-
       <!-- Maskot TRACON Section -->
-      <div id="tracon" v-reveal class="mb-16 reveal transition-all duration-300 text-slate-800 pt-8">
+      <div id="tracon" v-reveal class="mb-12 reveal transition-all duration-300 text-slate-800 pt-4">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <!-- Left Column: Mascot Presentation Carousel -->
           <div class="lg:col-span-5 flex justify-center w-full">
@@ -396,7 +376,7 @@
       </div>
 
       <!-- TRACON Mascot Animation Section -->
-      <div id="tracon-zone" v-reveal class="mb-16 reveal transition-all duration-300">
+      <div id="tracon-zone" v-reveal class="mb-12 reveal transition-all duration-300">
         <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#f8fafc] via-[#eff6ff] to-[#fef2f2] border border-slate-200/60 shadow-sm py-10 px-6 md:px-12">
 
           <!-- Floating particle decorations -->
@@ -438,29 +418,18 @@
               <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0b1c3f]/10 text-[#0b1c3f] text-xs font-bold uppercase tracking-wider">
                 🤖 Sudut TRACON
               </div>
-              <h3 class="text-2xl md:text-3xl font-extrabold text-[#0b1c3f] tracking-tight uppercase leading-tight">
-                Bertemu <span class="text-[#d21d1d]">TRACON</span>, Maskot CITRACon
+              <h3 class="text-2xl md:text-3xl font-extrabold text-[#0b1c3f] tracking-tight uppercase leading-tight" v-html="siteSettings.tracon_title || 'Bertemu <span class=\'text-[#d21d1d]\'>TRACON</span>, Maskot CITRACon'">
               </h3>
               <p class="text-slate-500 text-sm leading-relaxed">
-                TRACON adalah maskot resmi CITRACon — sosok pahlawan konstruksi yang kuat, ramah, dan siap mewujudkan infrastruktur impian Anda bersama tim terbaik kami.
+                {{ siteSettings.tracon_desc || 'TRACON adalah maskot resmi CITRACon — sosok pahlawan konstruksi yang kuat, ramah, dan siap mewujudkan infrastruktur impian Anda bersama tim terbaik kami.' }}
               </p>
 
               <!-- Fun Stats -->
               <div class="grid grid-cols-3 gap-3 pt-2">
-                <div class="text-center p-3 rounded-xl bg-white border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
-                  <div class="text-2xl font-black text-[#d21d1d]">💪</div>
-                  <div class="text-xs font-bold text-[#0b1c3f] mt-1">Kekuatan</div>
-                  <div class="text-[10px] text-slate-400">K-500 Ready</div>
-                </div>
-                <div class="text-center p-3 rounded-xl bg-white border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
-                  <div class="text-2xl font-black text-emerald-500">😊</div>
-                  <div class="text-xs font-bold text-[#0b1c3f] mt-1">Keramahan</div>
-                  <div class="text-[10px] text-slate-400">Siap Bantu 24h</div>
-                </div>
-                <div class="text-center p-3 rounded-xl bg-white border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
-                  <div class="text-2xl font-black text-amber-500">🏆</div>
-                  <div class="text-xs font-bold text-[#0b1c3f] mt-1">Kualitas</div>
-                  <div class="text-[10px] text-slate-400">SNI Certified</div>
+                <div v-for="(stat, sIdx) in traconFunStats" :key="sIdx" class="text-center p-3 rounded-xl bg-white border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+                  <div class="text-2xl font-black">{{ stat.icon }}</div>
+                  <div class="text-xs font-bold text-[#0b1c3f] mt-1">{{ stat.title }}</div>
+                  <div class="text-[10px] text-slate-400">{{ stat.subtitle }}</div>
                 </div>
               </div>
 
@@ -478,6 +447,31 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Klien Kami Section -->
+      <div id="klien" v-reveal class="rounded-3xl border border-slate-100 bg-white p-8 md:p-12 relative overflow-hidden mb-12 reveal transition-all duration-300 shadow-md text-slate-800 text-center">
+        <div class="max-w-3xl mx-auto mb-8">
+          <div class="inline-block px-4 py-1.5 bg-[#d21d1d]/10 text-[#d21d1d] text-xs font-bold uppercase tracking-wider rounded-full mb-3">
+            Klien Kami
+          </div>
+          <h2 class="text-2xl md:text-3xl font-bold text-[#0b1c3f] tracking-tight uppercase">Kemitraan Terpercaya</h2>
+          <p class="text-slate-500 text-sm mt-3 leading-relaxed">
+            Kami bangga telah dipercaya oleh berbagai perusahaan kontraktor terkemuka dan instansi nasional untuk mendukung kesuksesan pembangunan infrastruktur di Indonesia.
+          </p>
+        </div>
+        
+        <!-- Client Logos Row -->
+        <div class="flex flex-wrap items-center justify-center gap-12 mt-6">
+          <div 
+            v-for="(client, idx) in siteSettings.client_logos" 
+            :key="idx"
+            class="flex items-center justify-center bg-slate-50 border border-slate-100 rounded-2xl p-4 w-52 h-24 shadow-sm hover:shadow-md hover:border-slate-200 transition-all duration-300 group cursor-pointer"
+          >
+            <img v-if="client.image" :src="client.image" :alt="client.name" class="max-h-12 w-auto object-contain transition-all duration-300 group-hover:scale-105" />
+            <span v-else class="text-xs font-bold text-slate-400">{{ client.name }}</span>
           </div>
         </div>
       </div>
@@ -644,6 +638,7 @@
                     <q-item-label class="text-sm text-slate-600 mt-1.5 leading-relaxed">
                       {{ siteSettings.contact_wa_1_label }}: <a :href="'https://wa.me/' + siteSettings.contact_wa_1_num" target="_blank" class="text-slate-600 hover:text-[#d21d1d] font-bold transition-all no-underline">{{ siteSettings.contact_wa_1_num }}</a><br>
                       {{ siteSettings.contact_wa_2_label }}: <a :href="'https://wa.me/' + siteSettings.contact_wa_2_num" target="_blank" class="text-slate-600 hover:text-[#d21d1d] font-bold transition-all no-underline">{{ siteSettings.contact_wa_2_num }}</a><br>
+                      Sales 3: <a href="https://wa.me/6287848104524" target="_blank" class="text-slate-600 hover:text-[#d21d1d] font-bold transition-all no-underline">087848104524</a><br>
                       Email: <a :href="'mailto:' + siteSettings.contact_email" class="text-[#0b1c3f] hover:text-[#d21d1d] font-semibold transition-all no-underline">{{ siteSettings.contact_email }}</a>
                     </q-item-label>
                   </q-item-section>
@@ -797,6 +792,22 @@
                 <div class="text-xs text-slate-400">{{ siteSettings.contact_wa_2_num }}</div>
               </div>
             </a>
+
+            <!-- Sales 3 Button -->
+            <a
+              :href="waSales3Url"
+              target="_blank"
+              class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#d21d1d]/50 transition-all duration-300 no-underline cursor-pointer group"
+              @click="showWhatsAppChoice = false"
+            >
+              <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+                <q-icon name="chat" size="20px" />
+              </div>
+              <div class="text-left">
+                <div class="text-sm font-bold text-white group-hover:text-[#d21d1d] transition-colors">WhatsApp Sales 3</div>
+                <div class="text-xs text-slate-400">087848104524</div>
+              </div>
+            </a>
           </div>
         </q-card-section>
 
@@ -826,8 +837,8 @@ onMounted(() => {
   fetchProducts()
   fetchSiteSettings()
   speechInterval = setInterval(() => {
-    activeSpeechIdx.value = (activeSpeechIdx.value + 1) % traconspeech.length
-    activeMascotSlide.value = (activeMascotSlide.value + 1) % mascotImages.length
+    activeSpeechIdx.value = (activeSpeechIdx.value + 1) % traconspeech.value.length
+    activeMascotSlide.value = (activeMascotSlide.value + 1) % mascotImages.value.length
   }, 3000)
 })
 onUnmounted(() => {
@@ -866,8 +877,14 @@ const siteSettings = ref({
   misi_items: [],
   portfolio_items: [],
   tracon_subtitle: '',
+  tracon_title: '',
+  tracon_desc: '',
+  tracon_images: [],
   tracon_profile_cards: [],
   tracon_philosophy_cards: [],
+  tracon_fun_stats: [],
+  tracon_speech_bubbles: [],
+  client_logos: [],
   contact_wa_1_label: '',
   contact_wa_1_num: '',
   contact_wa_2_label: '',
@@ -878,6 +895,15 @@ const siteSettings = ref({
   contact_maps_url: ''
 })
 
+function cleanPhone(phone) {
+  if (!phone) return ''
+  let cleaned = phone.replace(/[^0-9]/g, '')
+  if (cleaned.startsWith('0')) {
+    cleaned = '62' + cleaned.slice(1)
+  }
+  return cleaned
+}
+
 async function fetchSiteSettings() {
   const { data, error } = await supabase
     .from('site_settings')
@@ -887,13 +913,73 @@ async function fetchSiteSettings() {
   if (error) {
     console.error('Error fetching site settings:', error)
   } else if (data) {
-    siteSettings.value = data
+    const safeParse = (val, fallback = []) => {
+      if (!val) return fallback
+      try {
+        const parsed = typeof val === 'string' ? JSON.parse(val) : val
+        return (Array.isArray(parsed) && parsed.length > 0) ? parsed : fallback
+      } catch (e) {
+        console.error('Error parsing JSON field:', e)
+        return fallback
+      }
+    }
+
+    siteSettings.value = {
+      ...data,
+      hero_slides: safeParse(data.hero_slides, [
+        { image: 'precast_concrete_factory_1782379014858.png', title: 'Beton Precast Mutu Tinggi', desc: 'Menghadirkan kekuatan optimal dan presisi tinggi untuk segala kebutuhan infrastruktur.' }
+      ]),
+      misi_items: safeParse(data.misi_items, [
+        'Memproduksi produk beton pracetak dengan mutu tinggi standar SNI.',
+        'Memberikan layanan tepat waktu dan pengiriman profesional.',
+        'Mendukung pembangunan infrastruktur nasional dengan kemitraan terpercaya.'
+      ]),
+      portfolio_items: safeParse(data.portfolio_items, [
+        { category: 'Infrastruktur Jalan', title: 'Pemasangan U-Ditch Tol Cipali', desc: 'Suplai dan pemasangan U-Ditch ukuran 60x60 cm sepanjang 2.4 km untuk drainase utama jalan tol.', image: 'precast_concrete_uditch_1782378967095.png' },
+        { category: 'Saluran Irigasi', title: 'Saluran Box Culvert Primer Bekasi', desc: 'Konstruksi gorong-gorong penyaluran air pemukiman menggunakan Box Culvert ukuran 120x120 cm.', image: 'precast_concrete_structure_1782378994309.png' },
+        { category: 'Pondasi Berat', title: 'Pondasi Spun Pile Pelabuhan Patimban', desc: 'Pemancangan tiang pancang spun pile silinder diameter 500 mm untuk dermaga logistik laut.', image: 'precast_concrete_factory_1782379014858.png' }
+      ]),
+      tracon_images: safeParse(data.tracon_images, ['tracon.png', 'tracon2.png', 'tracon3.png', 'tracon4.png', 'tracon5.png']),
+      tracon_profile_cards: safeParse(data.tracon_profile_cards, [
+        { title: 'Asal Nama TRACON', desc: 'Singkatan dari <strong>TRA</strong>nsformer <strong>CON</strong>crete. Melambangkan robot pelindung dan pembangun konstruksi beton yang kokoh.' },
+        { title: 'Nilai Kerja TRACON', desc: 'Mengutamakan presisi tinggi (Precision), kekuatan struktural (Strength), ketahanan 100 tahun (Durability), dan keselamatan kerja (Safety).' }
+      ]),
+      tracon_philosophy_cards: safeParse(data.tracon_philosophy_cards, [
+        { icon: '🪖', title: 'Helm Safety Merah', desc: 'Simbol kepemimpinan, keberanian, keselamatan kerja utama di lapangan proyek.' },
+        { icon: '🛡️', title: 'Armor Baja K-500', desc: 'Kekuatan tekan beton precast mutu K-500 ke atas yang tahan segala cuaca.' },
+        { icon: '⚡', title: 'Inti Reaktor Energi', desc: 'Melambangkan energi efisiensi tinggi, percepatan fabrikasi, dan pengiriman tepat waktu.' }
+      ]),
+      tracon_fun_stats: safeParse(data.tracon_fun_stats, [
+        { icon: '💪', title: 'Kekuatan', subtitle: 'K-500 Ready' },
+        { icon: '😊', title: 'Keramahan', subtitle: 'Siap Bantu 24h' },
+        { icon: '🏆', title: 'Kualitas', subtitle: 'SNI Certified' }
+      ]),
+      tracon_speech_bubbles: safeParse(data.tracon_speech_bubbles, [
+        '🦺 Halo! Saya TRACON, siap membangun Indonesia!',
+        '🧱 Precast berkualitas = infrastruktur awet 100 tahun!',
+        '🚚 Pengiriman cepat, tepat waktu, no drama!',
+        '📋 SNI certified? Tentu! Standar terjamin bro!',
+        '💪 Kuat tekan K-500? Itu standar minimal kami!',
+        '🤝 Hubungi tim kami, konsultasi gratis!',
+        '🏗️ Dari U-Ditch hingga Box Culvert, semua ada!',
+        '😄 Proyek besar atau kecil, kami siap!'
+      ]),
+      tracon_faq: safeParse(data.tracon_faq),
+      client_logos: safeParse(data.client_logos, [
+        { name: 'Brantas Abipraya', image: '/brantas.png' },
+        { name: 'Agra Budi', image: '/agra.png' }
+      ])
+    }
     
     // Update dynamic WA URLs based on settings
-    const wa1Msg = encodeURIComponent('Halo Sales CITRACon, saya ingin bertanya mengenai produk beton precast.')
-    const wa2Msg = encodeURIComponent('Halo Sales CITRACon, saya ingin bertanya mengenai produk beton precast.')
-    waSales1Url.value = `https://wa.me/${data.contact_wa_1_num}?text=${wa1Msg}`
-    waSales2Url.value = `https://wa.me/${data.contact_wa_2_num}?text=${wa2Msg}`
+    const waMsg = encodeURIComponent('Halo Sales CITRACon, saya ingin bertanya mengenai produk beton precast.')
+    const num1 = cleanPhone(data.contact_wa_1_num) || '6281398354196'
+    const num2 = cleanPhone(data.contact_wa_2_num) || '6285695660902'
+    const num3 = cleanPhone(data.contact_wa_3_num) || '6287848104524'
+    
+    waSales1Url.value = `https://wa.me/${num1}?text=${waMsg}`
+    waSales2Url.value = `https://wa.me/${num2}?text=${waMsg}`
+    waSales3Url.value = `https://wa.me/${num3}?text=${waMsg}`
   }
 }
 
@@ -914,41 +1000,53 @@ const leadForm = ref({
 
 const waSales1Url = ref('https://wa.me/6281398354196')
 const waSales2Url = ref('https://wa.me/6285695660902')
+const waSales3Url = ref('https://wa.me/6287848104524')
 
 function openWhatsAppWithChoice(customMessage = '') {
-  if (customMessage) {
-    const encoded = encodeURIComponent(customMessage)
-    waSales1Url.value = `https://wa.me/6281398354196?text=${encoded}`
-    waSales2Url.value = `https://wa.me/6285695660902?text=${encoded}`
-  } else {
-    const defaultMsg = encodeURIComponent('Halo Sales CITRACon, saya ingin bertanya mengenai produk beton precast.')
-    waSales1Url.value = `https://wa.me/6281398354196?text=${defaultMsg}`
-    waSales2Url.value = `https://wa.me/6285695660902?text=${defaultMsg}`
-  }
+  const num1 = cleanPhone(siteSettings.value.contact_wa_1_num) || '6281398354196'
+  const num2 = cleanPhone(siteSettings.value.contact_wa_2_num) || '6285695660902'
+  const num3 = cleanPhone(siteSettings.value.contact_wa_3_num) || '6287848104524'
+  
+  const msg = customMessage || 'Halo Sales CITRACon, saya ingin bertanya mengenai produk beton precast.'
+  const encoded = encodeURIComponent(msg)
+  
+  waSales1Url.value = `https://wa.me/${num1}?text=${encoded}`
+  waSales2Url.value = `https://wa.me/${num2}?text=${encoded}`
+  waSales3Url.value = `https://wa.me/${num3}?text=${encoded}`
+  
   showWhatsAppChoice.value = true
 }
 
 const activeMascotTab = ref('profile')
 const activeMascotSlide = ref(0)
-const mascotImages = [
+
+const defaultMascotImages = [
   'tracon.png',
   'tracon2.png',
   'tracon3.png',
   'tracon4.png',
   'tracon5.png'
 ]
-const activeMascotImg = computed(() => mascotImages[activeMascotSlide.value])
+
+const mascotImages = computed(() => {
+  if (siteSettings.value.tracon_images && siteSettings.value.tracon_images.length > 0) {
+    return siteSettings.value.tracon_images
+  }
+  return defaultMascotImages
+})
+
+const activeMascotImg = computed(() => mascotImages.value[activeMascotSlide.value] || '')
 
 function prevMascotSlide() {
-  activeMascotSlide.value = activeMascotSlide.value === 0 ? mascotImages.length - 1 : activeMascotSlide.value - 1
+  activeMascotSlide.value = activeMascotSlide.value === 0 ? mascotImages.value.length - 1 : activeMascotSlide.value - 1
 }
 
 function nextMascotSlide() {
-  activeMascotSlide.value = activeMascotSlide.value === mascotImages.length - 1 ? 0 : activeMascotSlide.value + 1
+  activeMascotSlide.value = activeMascotSlide.value === mascotImages.value.length - 1 ? 0 : activeMascotSlide.value + 1
 }
 
 // TRACON Mascot speech bubbles
-const traconspeech = [
+const defaultSpeechBubbles = [
   '🦺 Halo! Saya TRACON, siap membangun Indonesia!',
   '🧱 Precast berkualitas = infrastruktur awet 100 tahun!',
   '🚚 Pengiriman cepat, tepat waktu, no drama!',
@@ -956,16 +1054,62 @@ const traconspeech = [
   '💪 Kuat tekan K-500? Itu standar minimal kami!',
   '🤝 Hubungi tim kami, konsultasi gratis!',
   '🏗️ Dari U-Ditch hingga Box Culvert, semua ada!',
-  '😄 Proyek besar atau kecil, kami siap!',
+  '😄 Proyek besar atau kecil, kami siap!'
 ]
+
+const traconspeech = computed(() => {
+  if (siteSettings.value.tracon_speech_bubbles && siteSettings.value.tracon_speech_bubbles.length > 0) {
+    return siteSettings.value.tracon_speech_bubbles
+  }
+  return defaultSpeechBubbles
+})
+
+const defaultFunStats = [
+  { icon: '💪', title: 'Kekuatan', subtitle: 'K-500 Ready' },
+  { icon: '😊', title: 'Keramahan', subtitle: 'Siap Bantu 24h' },
+  { icon: '🏆', title: 'Kualitas', subtitle: 'SNI Certified' }
+]
+
+const traconFunStats = computed(() => {
+  if (siteSettings.value.tracon_fun_stats && siteSettings.value.tracon_fun_stats.length > 0) {
+    return siteSettings.value.tracon_fun_stats
+  }
+  return defaultFunStats
+})
+
 const activeSpeechIdx = ref(0)
 
 function nextMascotSpeech() {
-  activeSpeechIdx.value = (activeSpeechIdx.value + 1) % traconspeech.length
-  activeMascotSlide.value = (activeMascotSlide.value + 1) % mascotImages.length
+  activeSpeechIdx.value = (activeSpeechIdx.value + 1) % traconspeech.value.length
+  activeMascotSlide.value = (activeMascotSlide.value + 1) % mascotImages.value.length
 }
 
 const products = ref([])
+
+// Deskripsi fallback produk berdasarkan nama (jika field desc di database kosong)
+function getProductDesc(name) {
+  const n = (name || '').toLowerCase()
+  if (n.includes('u-ditch') || n.includes('uditch') || n.includes('saluran'))
+    return 'Saluran drainase berbentuk U dari beton precast, digunakan untuk mengalirkan air hujan di jalan, perumahan, dan kawasan industri.'
+  if (n.includes('box culvert'))
+    return 'Gorong-gorong kotak dari beton precast untuk saluran air di bawah jalan, jembatan, dan infrastruktur irigasi.'
+  if (n.includes('k-300') || n.includes('k300') || n.includes('tiang') || n.includes('spun pile') || n.includes('pile'))
+    return 'Tiang pancang beton precast berkekuatan tinggi untuk pondasi bangunan, jembatan, dan konstruksi berat.'
+  if (n.includes('paving') || n.includes('conblock'))
+    return 'Conblok beton precast untuk perkerasan jalan, trotoar, area parkir, dan taman dengan berbagai pilihan motif.'
+  if (n.includes('kanstin') || n.includes('batu tepi') || n.includes('curb'))
+    return 'Batu tepi jalan (kanstin) beton precast sebagai pembatas antara jalur kendaraan dan pejalan kaki.'
+  if (n.includes('plat') || n.includes('deck') || n.includes('slab'))
+    return 'Panel pelat lantai beton precast siap pasang untuk konstruksi gedung, jembatan, dan lantai industri.'
+  if (n.includes('gorong') || n.includes('pipa') || n.includes('culvert'))
+    return 'Pipa gorong-gorong beton precast untuk saluran drainase bawah tanah, irigasi, dan utilitas infrastruktur.'
+  if (n.includes('buis') || n.includes('bak'))
+    return 'Buis beton precast untuk sumur resapan, saluran air, dan konstruksi drainase vertikal di berbagai proyek.'
+  if (n.includes('barrier') || n.includes('jersey') || n.includes('pembatas'))
+    return 'Pembatas jalan (road barrier) beton precast untuk keselamatan lalu lintas dan pemisah jalur kendaraan.'
+  // Default fallback
+  return 'Produk beton precast berkualitas tinggi berstandar SNI, diproduksi dengan material pilihan dan presisi tinggi untuk infrastruktur yang tahan lama.'
+}
 
 async function fetchProducts() {
   const { data, error } = await supabase

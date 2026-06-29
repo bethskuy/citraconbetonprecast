@@ -145,7 +145,7 @@
               <!-- High-res Logo -->
               <img 
                 src="icons/favicon-128x128.png" 
-                class="relative w-7 h-7 rounded-lg border border-white/20 bg-[#050b18] p-0.5 object-contain" 
+                class="relative w-7 h-7 rounded-lg border border-white/20 bg-white p-0.5 object-contain" 
                 alt="CITRACon Logo" 
               />
             </div>
@@ -382,6 +382,16 @@
                 </q-item-section>
               </q-item>
 
+              <!-- WhatsApp 3 -->
+              <q-item class="q-px-none q-py-xs min-h-0 items-center text-xs text-slate-300">
+                <q-item-section avatar class="min-w-0 q-pr-sm text-slate-300">
+                  <q-icon name="chat" size="16px" class="text-slate-300" />
+                </q-item-section>
+                <q-item-section class="text-slate-300">
+                  <a href="https://wa.me/6287848104524" target="_blank" class="text-slate-300 hover:text-white transition-all duration-300 no-underline hover-underline-left inline-block w-fit self-start">087848104524</a>
+                </q-item-section>
+              </q-item>
+
               <!-- Email -->
               <q-item class="q-px-none q-py-xs min-h-0 items-center text-xs text-slate-300">
                 <q-item-section avatar class="min-w-0 q-pr-sm text-slate-300">
@@ -541,9 +551,10 @@
           <p class="text-slate-300 text-xs mb-6">Silakan pilih salah satu layanan WhatsApp Sales kami untuk konsultasi:</p>
 
           <div class="space-y-4">
-             <!-- Sales 1 Button -->
+            <!-- Sales 1 Button -->
             <a
-              :href="'https://wa.me/' + siteSettings.contact_wa_1_num"
+              v-if="siteSettings.contact_wa_1_num"
+              :href="'https://wa.me/' + cleanPhone(siteSettings.contact_wa_1_num)"
               target="_blank"
               class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#d21d1d]/50 transition-all duration-300 no-underline cursor-pointer group"
               @click="showWhatsAppChoice = false"
@@ -559,7 +570,8 @@
 
             <!-- Sales 2 Button -->
             <a
-              :href="'https://wa.me/' + siteSettings.contact_wa_2_num"
+              v-if="siteSettings.contact_wa_2_num"
+              :href="'https://wa.me/' + cleanPhone(siteSettings.contact_wa_2_num)"
               target="_blank"
               class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#d21d1d]/50 transition-all duration-300 no-underline cursor-pointer group"
               @click="showWhatsAppChoice = false"
@@ -570,6 +582,23 @@
               <div class="text-left">
                 <div class="text-sm font-bold text-white group-hover:text-[#d21d1d] transition-colors">{{ siteSettings.contact_wa_2_label || 'WhatsApp Sales 2' }}</div>
                 <div class="text-xs text-slate-400">{{ siteSettings.contact_wa_2_num }}</div>
+              </div>
+            </a>
+
+            <!-- Sales 3 Button -->
+            <a
+              v-if="siteSettings.contact_wa_3_num"
+              :href="'https://wa.me/' + cleanPhone(siteSettings.contact_wa_3_num)"
+              target="_blank"
+              class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#d21d1d]/50 transition-all duration-300 no-underline cursor-pointer group"
+              @click="showWhatsAppChoice = false"
+            >
+              <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+                <q-icon name="chat" size="20px" />
+              </div>
+              <div class="text-left">
+                <div class="text-sm font-bold text-white group-hover:text-[#d21d1d] transition-colors">{{ siteSettings.contact_wa_3_label || 'WhatsApp Sales 3' }}</div>
+                <div class="text-xs text-slate-400">{{ siteSettings.contact_wa_3_num }}</div>
               </div>
             </a>
           </div>
@@ -585,12 +614,192 @@
         </q-card-actions>
       </q-card>
     </q-dialog>
+
+    <!-- Floating WhatsApp Action Button -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-center">
+      <button 
+        @click="showWhatsAppChoice = true"
+        class="w-14 h-14 rounded-full bg-[#25d366] hover:bg-[#20ba5a] text-white flex items-center justify-center shadow-xl hover:shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 relative group cursor-pointer border-0"
+        title="Hubungi Kami di WhatsApp"
+      >
+        <!-- Pulse ring animation -->
+        <span class="absolute inset-0 rounded-full bg-[#25d366] opacity-40 animate-ping"></span>
+        <!-- SVG WA Logo -->
+        <svg viewBox="0 0 24 24" class="w-7 h-7 fill-current z-10">
+          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.625 1.451 5.403.002 9.803-4.389 9.805-9.788.002-2.615-1.012-5.074-2.859-6.927C16.378 2.036 13.916 1.015 11.2 1.015c-5.41 0-9.81 4.39-9.812 9.79-.001 1.545.422 3.05 1.222 4.41l-.988 3.606 3.702-.97.025.015zM17.9 14.13c-.347-.173-2.054-1.014-2.37-1.13-.317-.116-.548-.173-.78.173-.23.348-.893 1.13-1.095 1.36-.2.232-.4.26-.748.087-.348-.173-1.47-.542-2.8-1.728-1.034-.922-1.733-2.06-1.936-2.41-.2-.347-.02-.535.153-.708.156-.156.347-.406.52-.608.174-.2.23-.347.348-.58.116-.23.058-.433-.03-.607-.086-.173-.78-1.88-.958-2.31-.22-.52-.455-.447-.62-.447-.16 0-.348-.015-.536-.015s-.493.07-.753.348c-.26.28-1 .978-1 2.385s1.03 2.76 1.173 2.95c.144.192 2.026 3.1 4.908 4.34.686.295 1.22.47 1.637.6.69.22 1.317.19 1.812.115.55-.083 1.704-.697 1.947-1.37.243-.672.243-1.25.17-1.37-.07-.12-.27-.193-.618-.367z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Floating TRACON Mascot Chatbot Launcher -->
+    <div class="fixed bottom-24 right-6 z-50 flex flex-col items-end">
+      <!-- Tooltip Speech Bubble -->
+      <transition
+        appear
+        enter-active-class="transition duration-300 ease-out transform translate-y-2 opacity-0"
+        enter-to-class="transform translate-y-0 opacity-100"
+        leave-active-class="transition duration-200 ease-in transform opacity-0"
+      >
+        <div 
+          v-if="showTooltip" 
+          @click="toggleChatbot"
+          class="bg-white text-slate-800 text-[11px] font-bold px-3 py-2 rounded-2xl shadow-xl border border-slate-100 mb-2 relative cursor-pointer hover:scale-105 active:scale-95 transition-all select-none max-w-[150px] text-center"
+        >
+          Tanya TRACON yuk! 🤖
+          <!-- arrow -->
+          <div class="absolute bottom-[-6px] right-5 w-3 h-3 bg-white border-r border-b border-slate-100 transform rotate-45"></div>
+        </div>
+      </transition>
+
+      <button 
+        @click="toggleChatbot"
+        class="bg-transparent border-0 outline-none hover:scale-110 active:scale-95 transition-all duration-300 relative cursor-pointer flex items-center justify-center select-none"
+        title="Tanya Maskot TRACON (FAQ)"
+      >
+        <!-- Mascot image directly -->
+        <img 
+          src="tracon.png" 
+          class="w-14 h-14 object-contain drop-shadow-2xl" 
+          alt="TRACON Chatbot"
+          @error="e => e.target.src = 'favicon.ico'"
+        />
+        <!-- Mini online active point -->
+        <span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white animate-pulse"></span>
+      </button>
+    </div>
+
+    <!-- Interactive FAQ Chatbox Window -->
+    <transition
+      enter-active-class="transition duration-300 ease-out"
+      enter-from-class="transform scale-95 translate-y-8 opacity-0"
+      enter-to-class="transform scale-100 translate-y-0 opacity-100"
+      leave-active-class="transition duration-200 ease-in"
+      leave-from-class="transform scale-100 translate-y-0 opacity-100"
+      leave-to-class="transform scale-95 translate-y-8 opacity-0"
+    >
+      <div 
+        v-if="showChatbot" 
+        class="fixed bottom-24 right-6 w-[360px] max-w-[90vw] h-[460px] max-h-[70vh] z-50 flex flex-col bg-[#0b1c3f]/95 backdrop-blur-xl border border-white/15 rounded-3xl overflow-hidden shadow-2xl text-white"
+      >
+        <!-- Header -->
+        <div class="p-4 bg-gradient-to-r from-[#0b1c3f] via-[#152c5c] to-[#1e1b4b] border-b border-white/10 flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <div class="relative w-9 h-9 rounded-full bg-white flex items-center justify-center shadow">
+              <img src="tracon.png" class="w-7 h-7 object-contain" alt="TRACON" />
+              <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-white animate-pulse"></span>
+            </div>
+            <div>
+              <div class="text-xs font-black uppercase tracking-wider text-white">TRACON Chatbot</div>
+              <div class="text-[10px] text-emerald-400 font-bold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+                Online & Siap Bantu
+              </div>
+            </div>
+          </div>
+          <button 
+            @click="showChatbot = false" 
+            class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer border-0"
+          >
+            ✕
+          </button>
+        </div>
+
+        <!-- Chat Messages Area -->
+        <div class="h-0 flex-1 p-4 overflow-y-auto overflow-x-hidden space-y-4 scroll-container-area" ref="chatScrollContainer">
+          <!-- Welcome Message -->
+          <div class="flex items-start gap-2.5">
+            <div class="w-7 h-7 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm border border-slate-100">
+              <img src="tracon.png" class="w-5 h-5 object-contain" />
+            </div>
+            <div class="p-3 rounded-2xl rounded-tl-none bg-white/10 border border-white/5 text-xs leading-relaxed max-w-[80%]">
+              Halo! Saya <strong>TRACON</strong>, asisten robot konstruksi CITRACon. 🤖
+              <br><br>
+              Pilih salah satu pertanyaan di bawah ini untuk mulai bertanya kepada saya:
+            </div>
+          </div>
+
+          <!-- 1. Question List (Only shows when no question has been clicked yet, inside scroll area) -->
+          <div v-if="chatMessages.length === 0" class="pl-9 space-y-2">
+            <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-2">
+              💡 Pilih Pertanyaan:
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <button
+                v-for="(faq, idx) in faqOptions"
+                :key="idx"
+                @click="askFaq(faq)"
+                :disabled="isTyping"
+                class="w-full text-left bg-white/5 hover:bg-white/10 border border-white/10 hover:border-red-500/30 rounded-xl px-3 py-2 text-white text-[11px] font-bold cursor-pointer transition-all active:scale-[0.99] disabled:opacity-50 whitespace-normal break-words"
+              >
+                ❓ {{ faq.question }}
+              </button>
+            </div>
+          </div>
+
+          <!-- Message History -->
+          <div v-for="(msg, idx) in chatMessages" :key="idx" class="space-y-4">
+            <!-- User message -->
+            <div v-if="msg.sender === 'user'" class="flex items-start gap-2.5 justify-end">
+              <div class="p-3 rounded-2xl rounded-tr-none bg-[#d21d1d] text-white text-xs leading-relaxed max-w-[80%] font-bold shadow-md shadow-red-500/10">
+                {{ msg.text }}
+              </div>
+            </div>
+            
+            <!-- Bot message -->
+            <div v-else class="flex items-start gap-2.5">
+              <div class="w-7 h-7 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm border border-slate-100">
+                <img src="tracon.png" class="w-5 h-5 object-contain" />
+              </div>
+              <div class="p-3 rounded-2xl rounded-tl-none bg-white/10 border border-white/5 text-xs leading-relaxed max-w-[80%]">
+                {{ msg.text }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Typing indicator -->
+          <div v-if="isTyping" class="flex items-start gap-2.5">
+            <div class="w-7 h-7 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm border border-slate-100">
+              <img src="tracon.png" class="w-5 h-5 object-contain" />
+            </div>
+            <div class="p-3 rounded-2xl rounded-tl-none bg-white/15 text-xs flex items-center gap-1.5">
+              <span>TRACON sedang mengetik</span>
+              <span class="flex gap-0.5 mt-0.5">
+                <span class="w-1 h-1 rounded-full bg-white animate-bounce" style="animation-delay: 0s"></span>
+                <span class="w-1 h-1 rounded-full bg-white animate-bounce" style="animation-delay: 0.15s"></span>
+                <span class="w-1 h-1 rounded-full bg-white animate-bounce" style="animation-delay: 0.3s"></span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pinned Footer Area (Always compact to prevent overflow clipping) -->
+        <div class="p-3 bg-[#0a152e] border-t border-white/10 flex flex-col gap-1.5">
+          <!-- 2. Back Button (Only shows when a question has been clicked) -->
+          <button
+            v-if="chatMessages.length > 0"
+            @click="resetChat"
+            :disabled="isTyping"
+            class="w-full text-center bg-gradient-to-r from-[#d21d1d] to-[#b01414] hover:from-[#e52222] hover:to-[#c71616] border-0 rounded-xl px-3 py-2 text-white text-[11px] font-black cursor-pointer transition-all active:scale-[0.99] disabled:opacity-50 flex items-center justify-center gap-1.5 shadow"
+          >
+            ⬅️ Kembali ke Daftar Pertanyaan
+          </button>
+          
+          <!-- Direct Whatsapp redirect -->
+          <button
+            @click="showWhatsAppChoice = true; showChatbot = false"
+            class="w-full text-center bg-[#059669] hover:bg-[#047857] border-0 rounded-xl px-3 py-2 text-white text-[11px] font-black cursor-pointer transition-all active:scale-[0.99] flex items-center justify-center gap-1"
+          >
+            💬 Hubungi Sales Langsung via WA
+          </button>
+        </div>
+      </div>
+    </transition>
   </q-layout>
 </template>
 
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { supabase } from 'src/boot/supabase'
 
@@ -644,8 +853,63 @@ const showPrivacyDialog = ref(false)
 const showTermsDialog = ref(false)
 const showWhatsAppChoice = ref(false)
 
+// Chatbot UI State
+const showChatbot = ref(false)
+const showTooltip = ref(false)
+const isTyping = ref(false)
+const chatMessages = ref([])
+const chatScrollContainer = ref(null)
+
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value
+}
+
+function toggleChatbot() {
+  showChatbot.value = !showChatbot.value
+  showTooltip.value = false
+}
+
+// Function to scroll chat window to bottom
+function scrollToBottom() {
+  setTimeout(() => {
+    const el = document.querySelector('.scroll-container-area')
+    if (el) {
+      el.scrollTop = el.scrollHeight
+    }
+  }, 50)
+}
+
+// Ask FAQ function
+async function askFaq(faq) {
+  if (isTyping.value) return
+  
+  // 1. Add user message
+  chatMessages.value.push({
+    sender: 'user',
+    text: faq.question
+  })
+  scrollToBottom()
+  
+  // 2. Set typing state
+  isTyping.value = true
+  scrollToBottom()
+  
+  // 3. Simulate typing delay
+  await new Promise(resolve => setTimeout(resolve, 800))
+  
+  // 4. Add bot response
+  chatMessages.value.push({
+    sender: 'bot',
+    text: faq.answer
+  })
+  isTyping.value = false;
+  scrollToBottom()
+}
+
+// Reset chat history helper
+function resetChat() {
+  chatMessages.value = []
+  isTyping.value = false
 }
 
 function handleScroll() {
@@ -687,11 +951,49 @@ const siteSettings = ref({
   contact_wa_1_num: '',
   contact_wa_2_label: '',
   contact_wa_2_num: '',
+  contact_wa_3_label: 'WhatsApp Sales 3',
+  contact_wa_3_num: '087848104524',
   contact_instagram: '',
   contact_tiktok: '',
   contact_email: '',
-  contact_maps_url: ''
+  contact_maps_url: '',
+  tracon_faq: []
 })
+
+// FAQ choices fallback
+const defaultFaq = [
+  { question: 'Berapa minimal order beton precast?', answer: 'Minimal pemesanan tergantung jenis produknya bro. Untuk U-Ditch dan Box Culvert biasanya minimal 10-20 pcs, sedangkan pipa beton (RCP) dan spun pile disesuaikan dengan volume proyek. Hubungi sales kami untuk negosiasi kuantitas kecil!' },
+  { question: 'Apakah produk CITRACon sudah berstandar SNI?', answer: 'Tentu saja! Semua produk beton precast CITRACon diproduksi dengan presisi tinggi menggunakan mutu beton minimal K-350 hingga K-500, dan sudah tersertifikasi Standar Nasional Indonesia (SNI) untuk ketahanan jangka panjang.' },
+  { question: 'Bagaimana sistem pengiriman produk?', answer: 'Kami menggunakan armada logistik mandiri (truk tronton/trailer) untuk mengirimkan produk langsung ke lokasi proyek Anda di seluruh area Jawa Barat, DKI Jakarta, Banten, dan sekitarnya. Pastikan akses jalan proyek cukup untuk dilewati kendaraan berat kami.' },
+  { question: 'Apakah bisa memesan ukuran kustom (Custom Moulding)?', answer: 'Sangat bisa bro! CITRACon memiliki pabrik dengan fasilitas cetakan khusus yang fleksibel. Jika proyek Anda membutuhkan dimensi U-Ditch, Box Culvert, atau precast panel non-standar, tim engineering kami siap memfabrikasi cetakan kustom sesuai SPK.' },
+  { question: 'Bagaimana sistem pembayaran pemesanan?', answer: 'Pembayaran biasanya dilakukan melalui transfer bank ke rekening resmi PT CITRACon Beton Precast sesuai termin kesepakatan Surat Perjanjian Kerja (SPK). Kami mendukung opsi pembayaran bertahap (Down Payment + Termin progress fabrikasi & pengiriman) maupun lunas di awal proyek.' },
+  { question: 'Berapa lama estimasi proses fabrikasi produk?', answer: 'Proses produksi berkisar antara 3 hingga 7 hari kerja tergantung volume pesanan dan antrean cetakan di pabrik kami. Untuk produk kustom (cetakan non-standar), estimasi waktu pengerjaan akan disesuaikan dengan kebutuhan pembuatan cetakan (moulding) baru oleh tim engineering kami.' },
+  { question: 'Di mana lokasi pabrik batching plant CITRACon?', answer: 'Batching plant dan pabrik utama kami berlokasi sangat strategis di area industri dengan akses jalan yang memadai untuk memudahkan mobilisasi material & armada pengiriman alat berat. Informasi peta navigasi Google Maps lengkap dapat Anda akses pada section Hubungi Kami di bagian bawah website.' }
+]
+
+const faqOptions = computed(() => {
+  const faq = siteSettings.value.tracon_faq
+  if (faq) {
+    try {
+      const parsed = typeof faq === 'string' ? JSON.parse(faq) : faq
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed.filter(item => item && typeof item === 'object' && item.question && item.answer)
+      }
+    } catch (e) {
+      console.error('Error parsing tracon_faq in main layout:', e)
+    }
+  }
+  return defaultFaq
+})
+
+function cleanPhone(phone) {
+  if (!phone) return ''
+  let cleaned = phone.replace(/[^0-9]/g, '')
+  if (cleaned.startsWith('0')) {
+    cleaned = '62' + cleaned.slice(1)
+  }
+  return cleaned
+}
 
 async function fetchSiteSettings() {
   const { data, error } = await supabase
@@ -702,7 +1004,11 @@ async function fetchSiteSettings() {
   if (error) {
     console.error('Error fetching site settings in layout:', error)
   } else if (data) {
-    siteSettings.value = data
+    siteSettings.value = {
+      ...data,
+      contact_wa_3_label: data.contact_wa_3_label || 'WhatsApp Sales 3',
+      contact_wa_3_num: data.contact_wa_3_num || '087848104524'
+    }
   }
 }
 
@@ -710,6 +1016,13 @@ onMounted(() => {
   window.addEventListener('scroll', handleScroll)
   handleScroll() // Initialize state in case page is loaded already scrolled
   fetchSiteSettings()
+  
+  // Show tooltip after 5 seconds to nudge visitors
+  setTimeout(() => {
+    if (!showChatbot.value) {
+      showTooltip.value = true
+    }
+  }, 5000)
 })
 
 onUnmounted(() => {

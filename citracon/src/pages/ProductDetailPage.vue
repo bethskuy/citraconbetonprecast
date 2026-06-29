@@ -23,7 +23,23 @@
       </nav>
     </div>
 
-    <div v-if="product" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Loading State -->
+    <div v-if="isLoading" class="max-w-7xl mx-auto px-4 py-32 flex flex-col items-center justify-center text-center">
+      <div class="relative w-24 h-24 mb-6">
+        <!-- Outer Glowing Spin Ring -->
+        <div class="absolute inset-0 rounded-full border-4 border-[#0b1c3f]/10 border-t-[#d21d1d] animate-spin"></div>
+        <!-- Inner CITRACon logo pulsing -->
+        <div class="absolute inset-4 rounded-2xl bg-white border border-slate-100 flex items-center justify-center shadow-lg shadow-slate-200/50 animate-pulse">
+          <img src="icons/favicon-128x128.png" class="w-10 h-10 object-contain rounded-lg" alt="CITRACon Logo" />
+        </div>
+      </div>
+      <h3 class="text-lg font-extrabold text-[#0b1c3f] tracking-tight uppercase">
+        Memuat <span class="text-[#0b1c3f]">CITRA</span><span class="text-[#d21d1d]">Con</span>
+      </h3>
+      <p class="text-xs text-slate-500 mt-1 max-w-xs leading-relaxed">Menyiapkan spesifikasi teknis dan formulir penawaran terbaik untuk Anda...</p>
+    </div>
+
+    <div v-else-if="product" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Two Column Layout: Main Details and Sticky Sidebar -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
@@ -70,7 +86,7 @@
               Deskripsi Produk
             </h2>
             <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-              {{ product.detailedDesc }}
+              {{ product.detailed_desc || product.detailedDesc || product.desc || 'Deskripsi produk belum tersedia.' }}
             </p>
           </div>
 
@@ -81,7 +97,7 @@
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div 
-                v-for="(feature, idx) in product.features" 
+                v-for="(feature, idx) in (product.features || [])"
                 :key="idx" 
                 class="group relative overflow-hidden flex items-start gap-3 p-4 rounded-xl border border-transparent cursor-pointer hover:shadow-md hover:-translate-y-1 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 ease-out"
                 :class="[
@@ -128,7 +144,10 @@
               Tabel Spesifikasi Teknis
             </h2>
             <div class="overflow-x-auto">
-              <table class="w-full text-left text-xs sm:text-sm border-collapse">
+              <div v-if="!product.technical_specs && !product.technicalSpecs" class="text-slate-400 text-sm py-4 text-center">
+                Spesifikasi teknis belum tersedia.
+              </div>
+              <table v-else class="w-full text-left text-xs sm:text-sm border-collapse">
                 <thead>
                   <tr class="bg-[#0b1c3f] text-white uppercase text-[10px] sm:text-xs tracking-wider">
                     <th class="p-4 rounded-l-xl">Parameter</th>
@@ -137,7 +156,7 @@
                 </thead>
                 <tbody class="divide-y divide-slate-100">
                   <tr 
-                    v-for="(spec, name) in product.technicalSpecs" 
+                    v-for="(spec, name) in (product.technical_specs || product.technicalSpecs || {})"
                     :key="name" 
                     class="hover:bg-slate-50 transition-colors"
                   >
@@ -146,6 +165,96 @@
                   </tr>
                 </tbody>
               </table>
+            </div>
+          </div>
+
+          <!-- Product Specific Pricelist Table Section -->
+          <div class="bg-gradient-to-br from-[#0b1c3f] via-[#10224b] to-[#071330] rounded-3xl border border-white/10 p-6 md:p-8 shadow-xl overflow-hidden relative">
+            <!-- Inner glowing blur decorations -->
+            <div class="absolute top-[-50px] left-[-50px] w-[150px] h-[150px] rounded-full bg-[#d21d1d]/15 blur-[45px] pointer-events-none"></div>
+            <div class="absolute bottom-[-50px] right-[-50px] w-[180px] h-[180px] rounded-full bg-[#3b82f6]/10 blur-[55px] pointer-events-none"></div>
+
+            <div class="relative z-10">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                <div>
+                  <h3 class="text-lg font-bold text-white uppercase tracking-wide flex items-center gap-2">
+                    <span>📊 Pricelist {{ product.name }}</span>
+                  </h3>
+                  <p class="text-xs text-slate-400 mt-0.5">Daftar estimasi harga Franco pabrik berdasarkan dimensi standar</p>
+                </div>
+                <button
+                  @click="showWhatsAppChoice = true"
+                  class="px-5 py-2.5 rounded-full bg-[#d21d1d] hover:bg-[#b21818] text-white font-bold text-xs shadow-md cursor-pointer transition-all border-0 flex items-center gap-1.5 active:scale-95"
+                >
+                  📥 Minta Penawaran SPH (PDF)
+                </button>
+              </div>
+
+              <!-- Table -->
+              <div class="overflow-x-auto rounded-2xl border border-white/10 bg-black/25">
+                <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                  <thead>
+                    <tr class="bg-black/45 text-slate-200 uppercase text-[10px] sm:text-xs tracking-wider border-b border-white/10">
+                      <th class="p-4 rounded-l-xl">Tipe / Ukuran Standar</th>
+                      <th class="p-4">Estimasi Berat</th>
+                      <th class="p-4">Harga Franco Pabrik</th>
+                      <th class="p-4 text-center rounded-r-xl">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-white/5">
+                    <tr 
+                      v-if="!product.size_options || !product.size_options.length"
+                      class="hover:bg-white/[0.05] transition-colors"
+                    >
+                      <td colspan="4" class="p-8 text-center text-slate-400 font-medium bg-transparent">
+                        Ukuran dan pricelist belum tersedia. Silakan hubungi tim sales kami untuk informasi harga lengkap.
+                      </td>
+                    </tr>
+                    <tr 
+                      v-else
+                      v-for="(size, idx) in product.size_options"
+                      :key="idx" 
+                      class="transition-all duration-200 hover:bg-white/[0.06] group"
+                      :class="idx % 2 === 0 ? 'bg-white/[0.02]' : 'bg-transparent'"
+                    >
+                      <td class="p-4 font-bold text-white group-hover:translate-x-1 transition-transform">{{ size.label }}</td>
+                      <td class="p-4 text-slate-300 font-medium">{{ size.weight ? size.weight + ' kg' : '-' }}</td>
+                      <td class="p-4 text-[#fbbf24] font-black text-sm sm:text-base">
+                        {{ size.price || getEstimatedPrice(product.name, size.label) }}
+                      </td>
+                      <td class="p-4 text-center">
+                        <button 
+                          @click="requestQuote(size)"
+                          class="px-4 py-1.5 rounded-full bg-emerald-500/10 hover:bg-emerald-500 border border-emerald-500/30 hover:border-emerald-500 text-emerald-400 hover:text-white transition-all font-bold text-xs cursor-pointer shadow-sm active:scale-95"
+                        >
+                          💬 Tanya Sales
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Notes Section -->
+              <div class="mt-6 p-4 rounded-2xl bg-black/30 border border-white/5 flex items-start gap-3">
+                <span class="text-xl">💡</span>
+                <div class="text-xs text-slate-400 leading-relaxed">
+                  <strong class="text-slate-200 uppercase tracking-wide">Penting untuk Diketahui:</strong>
+                  <ul class="list-disc pl-4 space-y-1 mt-1">
+                    <template v-if="siteSettings.pricelist_notes && siteSettings.pricelist_notes.length">
+                      <li v-for="(note, nIdx) in siteSettings.pricelist_notes" :key="nIdx">
+                        {{ note }}
+                      </li>
+                    </template>
+                    <template v-else>
+                      <li>Harga di atas merupakan **estimasi harga dasar Franco pabrik** (belum termasuk PPN 11% & ongkos kirim logistik).</li>
+                      <li>Harga final proyek Anda sangat ditentukan oleh **volume total pemesanan** (makin banyak makin murah) dan **lokasi pengiriman**.</li>
+                      <li>Hubungi sales kami untuk mendapatkan diskon terbaik dan Surat Penawaran Harga (SPH) resmi beserta kalkulasi ongkos kirim langsung ke proyek Anda.</li>
+                    </template>
+                  </ul>
+                </div>
+              </div>
+
             </div>
           </div>
           
@@ -169,7 +278,7 @@
                   @click="isDropdownOpen = !isDropdownOpen"
                   class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 font-semibold flex items-center justify-between cursor-pointer hover:border-[#d21d1d] hover:bg-white transition-all shadow-sm active:scale-[0.99] select-none"
                 >
-                  <span class="text-xs sm:text-sm">{{ currentSize ? currentSize.label : 'Pilih Ukuran' }}</span>
+                  <span class="text-xs sm:text-sm">{{ currentSize ? currentSize.label : (product.size_options?.length || product.sizeOptions?.length ? 'Pilih Ukuran' : 'Ukuran tersedia (hubungi sales)') }}</span>
                   <q-icon 
                     name="expand_more" 
                     class="text-slate-500 transition-transform duration-300"
@@ -199,7 +308,7 @@
                     class="absolute left-0 right-0 mt-2 bg-white/95 backdrop-blur-md border border-slate-100 rounded-2xl shadow-2xl p-2 z-50 list-none m-0 max-h-60 overflow-y-auto divide-y divide-slate-50"
                   >
                     <li 
-                      v-for="(option, idx) in product.sizeOptions" 
+                      v-for="(option, idx) in (product.size_options || product.sizeOptions || [])"
                       :key="idx"
                       @click="selectedSizeIndex = idx; isDropdownOpen = false"
                       class="px-4 py-3 rounded-xl cursor-pointer font-medium text-xs sm:text-sm transition-all duration-200 flex items-center justify-between"
@@ -247,7 +356,7 @@
               <div v-if="currentSize" class="bg-slate-50 rounded-2xl p-4 border border-slate-100 text-xs sm:text-sm space-y-2">
                 <div class="flex justify-between">
                   <span class="text-slate-500 font-medium">Mutu Kuat Tekan:</span>
-                  <span class="font-bold text-[#0b1c3f]">{{ product.specs.split('/')[0].trim() }}</span>
+                  <span class="font-bold text-[#0b1c3f]">{{ product.specs ? product.specs.split('/')[0].trim() : '-' }}</span>
                 </div>
                 <div class="flex justify-between" v-if="currentSize.weight">
                   <span class="text-slate-500 font-medium">Berat per pcs:</span>
@@ -277,6 +386,38 @@
                   🚀 Konsultasi Spesifikasi
                 </button>
               </div>
+            </div>
+          </div>
+
+          <!-- Katalog Produk Cepat (Sidebar) -->
+          <div v-if="products && products.length" class="bg-white rounded-3xl border border-slate-100 p-6 shadow-md">
+            <div class="text-xs font-bold uppercase tracking-wider text-[#d21d1d] mb-1">Pilihan Produk</div>
+            <h3 class="text-base font-bold text-[#0b1c3f] mb-4 border-b border-slate-100 pb-3">Katalog Precast</h3>
+            <div class="space-y-2">
+              <router-link
+                v-for="p in products"
+                :key="p.id"
+                :to="'/produk/' + p.id"
+                class="flex items-center justify-between p-3 rounded-xl border font-bold text-xs sm:text-sm transition-all duration-300 no-underline cursor-pointer group hover:bg-[#0b1c3f]/5"
+                :class="p.id === product.id ? 'bg-[#0b1c3f]/5 border-[#0b1c3f] text-[#0b1c3f]' : 'bg-slate-50 border-slate-200 text-slate-700'"
+              >
+                <div class="flex items-center gap-2.5">
+                  <span class="text-lg group-hover:scale-110 transition-transform">{{ p.icon }}</span>
+                  <span class="uppercase tracking-wide font-extrabold group-hover:text-[#d21d1d] transition-colors">{{ p.name }}</span>
+                </div>
+                <q-icon 
+                  v-if="p.id === product.id"
+                  name="check_circle" 
+                  class="text-[#0b1c3f]"
+                  size="16px"
+                />
+                <q-icon
+                  v-else
+                  name="chevron_right"
+                  class="text-slate-400 group-hover:translate-x-1 transition-transform"
+                  size="16px"
+                />
+              </router-link>
             </div>
           </div>
 
@@ -311,6 +452,58 @@
         </div>
 
       </div>
+
+      <!-- Horizontal Other Products Grid -->
+      <div v-if="products && products.length" class="mt-16 pt-10 border-t border-slate-200/50">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <div class="inline-block px-4 py-1.5 bg-[#d21d1d]/10 text-[#d21d1d] text-xs font-bold uppercase tracking-wider rounded-full mb-3">
+            Rekomendasi Lainnya
+          </div>
+          <h2 class="text-2xl md:text-3xl font-bold text-[#0b1c3f] tracking-tight uppercase">Produk Precast Terkait</h2>
+          <p class="text-slate-500 text-sm mt-2">Telusuri katalog produk pracetak berkualitas tinggi kami lainnya</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div
+            v-for="p in products.filter(item => item.id !== product.id).slice(0, 4)"
+            :key="p.id"
+            class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between min-h-[320px] p-5 bg-white border border-slate-100"
+          >
+            <!-- Thumbnail Image with Hover zoom -->
+            <div class="relative rounded-xl overflow-hidden h-40 mb-4 bg-slate-100">
+              <img 
+                :src="p.image" 
+                :alt="p.name" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="absolute top-3 left-3 bg-[#0b1c3f] text-white w-8 h-8 rounded-full flex items-center justify-center text-sm shadow">
+                {{ p.icon }}
+              </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="flex-grow flex flex-col justify-between">
+              <div>
+                <h3 class="text-sm font-extrabold text-[#0b1c3f] uppercase tracking-wider mb-2 group-hover:text-[#d21d1d] transition-colors">
+                  {{ p.name }}
+                </h3>
+                <p class="text-slate-500 text-[11px] leading-relaxed line-clamp-3 mb-4">
+                  {{ p.desc || 'Beton precast bermutu tinggi berstandar SNI untuk infrastruktur berkualitas.' }}
+                </p>
+              </div>
+              
+              <!-- Navigation button -->
+              <router-link 
+                :to="'/produk/' + p.id"
+                class="w-full text-center text-xs bg-[#d21d1d] hover:bg-[#b21818] text-white font-bold py-2.5 rounded-xl shadow-sm transition-all no-underline block cursor-pointer active:scale-95 border-0"
+              >
+                Lihat Detail
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
     
     <div v-else class="max-w-7xl mx-auto px-4 py-20 text-center">
@@ -369,7 +562,8 @@
           <div class="space-y-4">
             <!-- Sales 1 Button -->
             <a
-              :href="getWhatsAppLink('6281398354196')"
+              v-if="siteSettings.contact_wa_1_num"
+              :href="getWhatsAppLink(cleanPhone(siteSettings.contact_wa_1_num))"
               target="_blank"
               class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#d21d1d]/50 transition-all duration-300 no-underline cursor-pointer group"
               @click="showWhatsAppChoice = false"
@@ -378,14 +572,15 @@
                 <q-icon name="chat" size="20px" />
               </div>
               <div class="text-left">
-                <div class="text-sm font-bold text-white group-hover:text-[#d21d1d] transition-colors">WhatsApp Sales 1</div>
-                <div class="text-xs text-slate-400">0813-9835-4196</div>
+                <div class="text-sm font-bold text-white group-hover:text-[#d21d1d] transition-colors">{{ siteSettings.contact_wa_1_label || 'WhatsApp Sales 1' }}</div>
+                <div class="text-xs text-slate-400">{{ siteSettings.contact_wa_1_num }}</div>
               </div>
             </a>
 
             <!-- Sales 2 Button -->
             <a
-              :href="getWhatsAppLink('6285695660902')"
+              v-if="siteSettings.contact_wa_2_num"
+              :href="getWhatsAppLink(cleanPhone(siteSettings.contact_wa_2_num))"
               target="_blank"
               class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#d21d1d]/50 transition-all duration-300 no-underline cursor-pointer group"
               @click="showWhatsAppChoice = false"
@@ -394,8 +589,25 @@
                 <q-icon name="chat" size="20px" />
               </div>
               <div class="text-left">
-                <div class="text-sm font-bold text-white group-hover:text-[#d21d1d] transition-colors">WhatsApp Sales 2</div>
-                <div class="text-xs text-slate-400">0856-9566-0902</div>
+                <div class="text-sm font-bold text-white group-hover:text-[#d21d1d] transition-colors">{{ siteSettings.contact_wa_2_label || 'WhatsApp Sales 2' }}</div>
+                <div class="text-xs text-slate-400">{{ siteSettings.contact_wa_2_num }}</div>
+              </div>
+            </a>
+
+            <!-- Sales 3 Button -->
+            <a
+              v-if="siteSettings.contact_wa_3_num"
+              :href="getWhatsAppLink(cleanPhone(siteSettings.contact_wa_3_num))"
+              target="_blank"
+              class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#d21d1d]/50 transition-all duration-300 no-underline cursor-pointer group"
+              @click="showWhatsAppChoice = false"
+            >
+              <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+                <q-icon name="chat" size="20px" />
+              </div>
+              <div class="text-left">
+                <div class="text-sm font-bold text-white group-hover:text-[#d21d1d] transition-colors">{{ siteSettings.contact_wa_3_label || 'WhatsApp Sales 3' }}</div>
+                <div class="text-xs text-slate-400">{{ siteSettings.contact_wa_3_num }}</div>
               </div>
             </a>
           </div>
@@ -415,12 +627,13 @@
 </template>
 
 <script setup>
-import { ref, computed, watchEffect, onMounted } from 'vue'
+import { ref, computed, watchEffect, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useQuasar } from 'quasar'
 import { supabase } from 'src/boot/supabase'
 
 const route = useRoute()
+const products = ref([])
 const $q = useQuasar()
 const showModal = ref(false)
 const showWhatsAppChoice = ref(false)
@@ -430,30 +643,188 @@ const activeImage = ref('')
 const isDropdownOpen = ref(false)
 const address = ref('')
 
+function getEstimatedPrice(productName, sizeLabel) {
+  const name = (productName || '').toLowerCase()
+  const size = (sizeLabel || '').toLowerCase()
+  
+  if (name.includes('u-ditch') || name.includes('uditch')) {
+    if (size.includes('30 x 30')) return 'Rp 185.000'
+    if (size.includes('40 x 40')) return 'Rp 290.000'
+    if (size.includes('50 x 50')) return 'Rp 410.000'
+    if (size.includes('60 x 60')) return 'Rp 580.000'
+    if (size.includes('80 x 80')) return 'Rp 920.000'
+    if (size.includes('100 x 100')) return 'Rp 1.450.000'
+    return 'Rp 185.000'
+  }
+  if (name.includes('box culvert')) {
+    if (size.includes('40 x 40')) return 'Rp 950.000'
+    if (size.includes('50 x 50')) return 'Rp 1.150.000'
+    if (size.includes('60 x 60')) return 'Rp 1.480.000'
+    if (size.includes('80 x 80')) return 'Rp 2.100.000'
+    if (size.includes('100 x 100')) return 'Rp 3.100.000'
+    if (size.includes('150 x 150')) return 'Rp 5.800.000'
+    return 'Rp 950.000'
+  }
+  if (name.includes('pipa') || name.includes('rcp')) {
+    if (size.includes('300')) return 'Rp 280.000'
+    if (size.includes('400')) return 'Rp 395.000'
+    if (size.includes('500')) return 'Rp 520.000'
+    if (size.includes('600')) return 'Rp 690.000'
+    if (size.includes('800')) return 'Rp 1.150.000'
+    if (size.includes('1000')) return 'Rp 1.650.000'
+    return 'Rp 280.000'
+  }
+  if (name.includes('kanstin')) {
+    if (size.includes('jepit')) return 'Rp 42.000'
+    if (size.includes('taman')) return 'Rp 45.000'
+    if (size.includes('pembatas')) return 'Rp 58.000'
+    if (size.includes('dki')) return 'Rp 78.000'
+    return 'Rp 42.000'
+  }
+  if (name.includes('paving') || name.includes('conblock')) {
+    if (size.includes('6cm') || size.includes('6 cm')) return 'Rp 85.000'
+    if (size.includes('8cm') || size.includes('8 cm')) return 'Rp 98.000'
+    return 'Rp 85.000'
+  }
+  if (name.includes('spun pile') || name.includes('tiang pancang') || name.includes('pile')) {
+    if (size.includes('300')) return 'Rp 450.000'
+    if (size.includes('400')) return 'Rp 620.000'
+    if (size.includes('500')) return 'Rp 890.000'
+    return 'Rp 450.000'
+  }
+  if (name.includes('buis')) {
+    if (size.includes('20')) return 'Rp 75.000'
+    if (size.includes('30')) return 'Rp 95.000'
+    if (size.includes('40')) return 'Rp 135.000'
+    if (size.includes('60')) return 'Rp 195.000'
+    if (size.includes('80')) return 'Rp 285.000'
+    if (size.includes('100')) return 'Rp 395.000'
+    return 'Rp 75.000'
+  }
+  return 'Hubungi Sales'
+}
+
+function requestQuote(sizeOption) {
+  if (!product.value || !product.value.size_options) return
+  const idx = product.value.size_options.indexOf(sizeOption)
+  if (idx !== -1) {
+    selectedSizeIndex.value = idx
+  }
+  showWhatsAppChoice.value = true
+}
+
 const leadForm = ref({
   name: '',
   phone: '',
   address: ''
 })
 
+const isLoading = ref(true)
 const product = ref(null)
 
-async function fetchProduct() {
-  const id = parseInt(route.params.id)
+const siteSettings = ref({
+  contact_wa_1_label: 'WhatsApp Sales 1',
+  contact_wa_1_num: '081398354196',
+  contact_wa_2_label: 'WhatsApp Sales 2',
+  contact_wa_2_num: '085695660902',
+  contact_wa_3_label: 'WhatsApp Sales 3',
+  contact_wa_3_num: '087848104524',
+  pricelist_title: '',
+  pricelist_subtitle: '',
+  pricelist_notes: []
+})
+
+async function fetchSiteSettings() {
   const { data, error } = await supabase
+    .from('site_settings')
+    .select('*')
+    .eq('id', 1)
+    .single()
+  if (error) {
+    console.error('Error fetching site settings:', error)
+  } else if (data) {
+    const safeParse = (val, fallback = []) => {
+      if (!val) return fallback
+      try {
+        const parsed = typeof val === 'string' ? JSON.parse(val) : val
+        return (Array.isArray(parsed) && parsed.length > 0) ? parsed : fallback
+      } catch (e) {
+        console.error('Error parsing JSON field:', e)
+        return fallback
+      }
+    }
+
+    siteSettings.value = {
+      ...data,
+      pricelist_notes: safeParse(data.pricelist_notes, [
+        'Harga di atas merupakan estimasi harga dasar Franco pabrik (belum termasuk PPN 11% & ongkos kirim logistik).',
+        'Harga final proyek Anda sangat ditentukan oleh volume total pemesanan (makin banyak makin murah) dan lokasi pengiriman.',
+        'Hubungi sales kami untuk mendapatkan diskon terbaik dan Surat Penawaran Harga (SPH) resmi beserta kalkulasi ongkos kirim langsung ke proyek Anda.'
+      ]),
+      contact_wa_3_label: data.contact_wa_3_label || 'WhatsApp Sales 3',
+      contact_wa_3_num: data.contact_wa_3_num || '087848104524'
+    }
+  }
+}
+
+function cleanPhone(phone) {
+  if (!phone) return ''
+  let cleaned = phone.replace(/[^0-9]/g, '')
+  if (cleaned.startsWith('0')) {
+    cleaned = '62' + cleaned.slice(1)
+  }
+  return cleaned
+}
+
+async function fetchProduct() {
+  isLoading.value = true
+  const id = parseInt(route.params.id)
+  
+  // Minimal loading time 800ms agar transisi loading terasa smooth & tidak berkedip cepat
+  const minDelay = new Promise(resolve => setTimeout(resolve, 800))
+  const fetchQuery = supabase
     .from('products')
     .select('*')
     .eq('id', id)
     .single()
+
+  const [, { data, error }] = await Promise.all([minDelay, fetchQuery])
+
   if (error) {
     console.error('Error fetching product:', error)
+    product.value = null
   } else {
     product.value = data
   }
+  isLoading.value = false
 }
+
+async function fetchProducts() {
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .order('id', { ascending: true })
+  if (error) {
+    console.error('Error fetching all products:', error)
+  } else {
+    products.value = data
+  }
+}
+
+watch(() => route.params.id, (newId) => {
+  if (newId) {
+    selectedSizeIndex.value = 0
+    quantity.value = 50
+    address.value = ''
+    fetchProduct()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+})
 
 onMounted(() => {
   fetchProduct()
+  fetchSiteSettings()
+  fetchProducts()
 })
 
 watchEffect(() => {
@@ -464,7 +835,9 @@ watchEffect(() => {
 
 const currentSize = computed(() => {
   if (!product.value) return null
-  return product.value.sizeOptions[selectedSizeIndex.value]
+  const options = product.value.size_options || product.value.sizeOptions
+  if (!options || !options.length) return null
+  return options[selectedSizeIndex.value] || null
 })
 
 function getWhatsAppLink(phone) {
