@@ -834,6 +834,13 @@ const $q = useQuasar()
 // Auto-rotate TRACON speech bubble every 3 seconds
 let speechInterval = null
 onMounted(() => {
+  // Set default homepage browser tab title and meta description for SEO
+  document.title = 'CITRACon - Produsen Beton Precast Mutu Tinggi SNI'
+  const metaDesc = document.querySelector('meta[name="description"]')
+  if (metaDesc) {
+    metaDesc.setAttribute('content', 'Pabrik produsen beton precast (pracetak) mutu tinggi berstandar SNI. Menyediakan saluran U-Ditch, Box Culvert, RCP, Kanstin, Buis Beton, dan Pagar Panel.')
+  }
+
   fetchProducts()
   fetchSiteSettings()
   speechInterval = setInterval(() => {

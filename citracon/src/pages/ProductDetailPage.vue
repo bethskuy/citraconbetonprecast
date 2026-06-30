@@ -830,6 +830,13 @@ onMounted(() => {
 watchEffect(() => {
   if (product.value) {
     activeImage.value = product.value.image
+    // Set dynamic browser tab title for SEO
+    document.title = `Jual ${product.value.name} Beton Precast Mutu Tinggi SNI - CITRACon`
+    // Set dynamic meta description for Google search snippets
+    const metaDesc = document.querySelector('meta[name="description"]')
+    if (metaDesc) {
+      metaDesc.setAttribute('content', `Pabrik ${product.value.name} beton precast berkualitas tinggi standar SNI. Melayani pengiriman ke seluruh Jawa. Hubungi kami untuk penawaran harga terbaik!`)
+    }
   }
 })
 
