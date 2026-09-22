@@ -828,7 +828,7 @@
               <p class="text-xs text-slate-500 mt-2 leading-relaxed">
                 Tonton keseruan produksi pabrik, proses kirim barang, dan edukasi beton.
               </p>
-              <div class="text-[11px] font-bold text-slate-400 mt-2">@cvcitraelvanoberkah</div>
+              <div class="text-[11px] font-bold text-slate-400 mt-2">@citraconbetonprecast</div>
             </div>
             <div
               class="w-full text-xs bg-slate-900 hover:bg-black text-white font-bold py-2.5 rounded-full shadow-sm hover:shadow-md transition-all duration-300 text-center block mt-4"
