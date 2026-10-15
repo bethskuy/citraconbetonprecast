@@ -731,7 +731,7 @@ const product = ref(null)
 
 const siteSettings = ref({
   contact_wa_1_label: 'WhatsApp Sales 1',
-  contact_wa_1_num: '081398354196',
+  contact_wa_1_num: '085695660902',
   contact_wa_2_label: 'WhatsApp Sales 2',
   contact_wa_2_num: '085695660902',
   contact_wa_3_label: 'WhatsApp Sales 3',

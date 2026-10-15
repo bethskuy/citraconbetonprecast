@@ -1416,7 +1416,7 @@ async function fetchSiteSettings() {
     const waMsg = encodeURIComponent(
       'Halo Sales CITRACon, saya ingin bertanya mengenai produk beton precast.',
     )
-    const num1 = cleanPhone(data.contact_wa_1_num) || '6281398354196'
+    const num1 = cleanPhone(data.contact_wa_1_num) || '6285695660902'
     const num2 = cleanPhone(data.contact_wa_2_num) || '6285695660902'
     const num3 = cleanPhone(data.contact_wa_3_num) || '6287848104524'
 
@@ -1441,12 +1441,12 @@ const leadForm = ref({
   phone: '',
 })
 
-const waSales1Url = ref('https://wa.me/6281398354196')
+const waSales1Url = ref('https://wa.me/6285695660902')
 const waSales2Url = ref('https://wa.me/6285695660902')
 const waSales3Url = ref('https://wa.me/6287848104524')
 
 function openWhatsAppWithChoice(customMessage = '') {
-  const num1 = cleanPhone(siteSettings.value.contact_wa_1_num) || '6281398354196'
+  const num1 = cleanPhone(siteSettings.value.contact_wa_1_num) || '6285695660902'
   const num2 = cleanPhone(siteSettings.value.contact_wa_2_num) || '6285695660902'
   const num3 = cleanPhone(siteSettings.value.contact_wa_3_num) || '6287848104524'
 
