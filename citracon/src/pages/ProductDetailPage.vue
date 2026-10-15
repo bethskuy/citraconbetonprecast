@@ -406,9 +406,6 @@
                 "
               >
                 <div class="flex items-center gap-2.5">
-                  <span class="text-lg group-hover:scale-110 transition-transform">{{
-                    p.icon
-                  }}</span>
                   <span
                     class="uppercase tracking-wide font-extrabold group-hover:text-[#d21d1d] transition-colors"
                     >{{ p.name }}</span
