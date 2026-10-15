@@ -333,11 +333,6 @@
             <!-- Content Area -->
             <div class="relative z-20 flex flex-col justify-between h-full flex-grow">
               <div>
-                <div
-                  class="w-12 h-12 text-white flex items-center justify-center text-xl mb-4 rounded-xl shadow-md bg-white/10 backdrop-blur-md border border-white/20"
-                >
-                  {{ product.icon }}
-                </div>
                 <h3 class="text-lg font-bold text-white mb-2 uppercase tracking-wide">
                   {{ product.name }}
                 </h3>

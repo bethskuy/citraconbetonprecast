@@ -74,7 +74,7 @@
               <span
                 class="px-3.5 py-1.5 bg-[#d21d1d] text-white font-bold text-xs uppercase tracking-wider rounded-full shadow-sm"
               >
-                {{ product.icon }} Beton Pracetak
+                Beton Pracetak SNI
               </span>
               <h1
                 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mt-4 uppercase tracking-tight"
@@ -495,11 +495,6 @@
                 :alt="p.name"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div
-                class="absolute top-3 left-3 bg-[#0b1c3f] text-white w-8 h-8 rounded-full flex items-center justify-center text-sm shadow"
-              >
-                {{ p.icon }}
-              </div>
             </div>
 
             <!-- Content -->
