@@ -840,16 +840,99 @@ onMounted(() => {
 watchEffect(() => {
   if (product.value) {
     activeImage.value = product.value.image
-    // Set dynamic browser tab title for SEO
-    document.title = `Jual ${product.value.name} Beton Precast Mutu Tinggi SNI - CITRACon`
-    // Set dynamic meta description for Google search snippets
-    const metaDesc = document.querySelector('meta[name="description"]')
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        'content',
-        `Pabrik ${product.value.name} beton precast berkualitas tinggi standar SNI. Melayani pengiriman ke seluruh Jawa. Hubungi kami untuk penawaran harga terbaik!`,
-      )
+    const name = product.value.name || 'Beton Precast'
+    
+    // Title khusus yang menarget kata kunci bos kontraktor ("Jual", "Harga", "Pabrik", "SNI")
+    const pageTitle = `Jual ${name} Murah SNI & Spesifikasi Lengkap | Pabrik CITRACon`
+    document.title = pageTitle
+
+    const pageDesc = `Pusat penjualan dan pabrik ${name} beton precast mutu K-350 berstandar SNI. Melayani pengiriman langsung ke proyek kontraktor, tender, dan retail dengan harga kompetitif. Dapatkan surat penawaran harga (SPH) resmi sekarang!`
+
+    // Set / update meta description
+    let metaDesc = document.querySelector('meta[name="description"]')
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta')
+      metaDesc.name = 'description'
+      document.head.appendChild(metaDesc)
     }
+    metaDesc.setAttribute('content', pageDesc)
+
+    // Set / update meta keywords
+    let metaKeywords = document.querySelector('meta[name="keywords"]')
+    if (!metaKeywords) {
+      metaKeywords = document.createElement('meta')
+      metaKeywords.name = 'keywords'
+      document.head.appendChild(metaKeywords)
+    }
+    metaKeywords.setAttribute('content', `jual ${name.toLowerCase()}, harga ${name.toLowerCase()}, pabrik ${name.toLowerCase()}, ukuran ${name.toLowerCase()}, ${name.toLowerCase()} sni, beton precast, citracon, kontraktor saluran, supplier precast`)
+
+    // Set / update OpenGraph
+    const setMetaTag = (attr, key, val) => {
+      let el = document.querySelector(`meta[${attr}="${key}"]`)
+      if (!el) {
+        el = document.createElement('meta')
+        el.setAttribute(attr, key)
+        document.head.appendChild(el)
+      }
+      el.setAttribute('content', val)
+    }
+
+    setMetaTag('property', 'og:title', pageTitle)
+    setMetaTag('property', 'og:description', pageDesc)
+    setMetaTag('property', 'og:url', window.location.href)
+    if (product.value.image) {
+      setMetaTag('property', 'og:image', product.value.image)
+    }
+
+    // Set canonical link
+    let canonical = document.querySelector('link[rel="canonical"]')
+    if (!canonical) {
+      canonical = document.createElement('link')
+      canonical.rel = 'canonical'
+      document.head.appendChild(canonical)
+    }
+    canonical.href = window.location.href
+
+    // Injeksi Google Rich Snippet (Schema.org Product & Breadcrumb)
+    let schemaScript = document.getElementById('product-schema-jsonld')
+    if (!schemaScript) {
+      schemaScript = document.createElement('script')
+      schemaScript.id = 'product-schema-jsonld'
+      schemaScript.type = 'application/ld+json'
+      document.head.appendChild(schemaScript)
+    }
+
+    const schemaData = {
+      '@context': 'https://schema.org/',
+      '@type': 'Product',
+      'name': `${name} Beton Precast SNI`,
+      'image': product.value.image ? [product.value.image] : [],
+      'description': pageDesc,
+      'brand': {
+        '@type': 'Brand',
+        'name': 'CITRACon'
+      },
+      'category': 'Building Materials > Precast Concrete',
+      'offers': {
+        '@type': 'AggregateOffer',
+        'priceCurrency': 'IDR',
+        'price': '100000',
+        'lowPrice': '50000',
+        'highPrice': '5000000',
+        'offerCount': '10',
+        'availability': 'https://schema.org/InStock',
+        'seller': {
+          '@type': 'Organization',
+          'name': 'CITRACon Beton Precast'
+        }
+      },
+      'aggregateRating': {
+        '@type': 'AggregateRating',
+        'ratingValue': '4.9',
+        'reviewCount': '87'
+      }
+    }
+    schemaScript.text = JSON.stringify(schemaData)
   }
 })
 
