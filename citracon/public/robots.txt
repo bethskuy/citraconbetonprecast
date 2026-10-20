@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://citraconbetonprecast.web.id/sitemap.xml
+Sitemap: https://www.citraconbetonprecast.web.id/sitemap.xml
