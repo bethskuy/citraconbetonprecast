@@ -361,6 +361,133 @@
         </div>
       </div>
 
+      <!-- SEO Pillar Section: Jual U-Ditch & Beton Precast SNI -->
+      <div id="seo-uditch" class="mb-14 bg-gradient-to-br from-slate-50 to-white rounded-3xl border border-slate-200/80 p-6 md:p-10 shadow-sm">
+        <div class="max-w-4xl mx-auto">
+          <div class="inline-block px-3.5 py-1 bg-[#d21d1d]/10 text-[#d21d1d] text-xs font-bold uppercase tracking-wider rounded-full mb-3">
+            Pusat Penjualan & Pabrik Precast
+          </div>
+          <h2 class="text-2xl md:text-3xl font-extrabold text-[#0b1c3f] tracking-tight mb-4">
+            Jual U-Ditch Beton Precast & Saluran Drainase Mutu K-350 SNI
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-6">
+            CITRACon melayani penjualan <strong>U-Ditch beton precast</strong> (saluran air berbentuk U) dan <strong>Cover U-Ditch</strong> (Heavy Duty & Light Duty) berkualitas mutu tinggi standar SNI. Diproduksi menggunakan mesin berteknologi getar modern (dry cast / wet cast) dengan tulangan besi ulir kokoh, tahan terhadap beban kendaraan berat, banjir, dan tekanan tanah aktif.
+          </p>
+
+          <!-- Grid Keunggulan / Keyword SEO -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+            <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+              <div class="text-[#d21d1d] font-bold text-sm mb-1">Mutu Beton Teruji</div>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                Kuat tekan karakteristik K-350 hingga K-400 dengan uji laboratorium bersertifikat resmi.
+              </p>
+            </div>
+            <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+              <div class="text-[#0b1c3f] font-bold text-sm mb-1">Sistem Male-Female</div>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                Sambungan interlock presisi anti bocor, pemasangan di lokasi proyek jauh lebih cepat dan rapi.
+              </p>
+            </div>
+            <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+              <div class="text-emerald-600 font-bold text-sm mb-1">Pengiriman Armada Lengkap</div>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                Siap kirim ke Jabodetabek, Jawa Barat, Banten dan sekitarnya via Colt Diesel hingga Tronton Crane.
+              </p>
+            </div>
+          </div>
+
+          <!-- Tabel Ukuran & Daftar Produk yang Dicari Kontraktor -->
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm mb-8">
+            <div class="bg-[#0b1c3f] px-6 py-3.5 text-white flex items-center justify-between">
+              <h3 class="text-xs md:text-sm font-bold uppercase tracking-wider">
+                Daftar Spesifikasi & Ukuran U-Ditch Populer
+              </h3>
+              <span class="text-[11px] text-slate-300">Panjang Standar 120 cm</span>
+            </div>
+            <div class="p-4 sm:p-6 overflow-x-auto">
+              <table class="w-full text-left text-xs sm:text-sm">
+                <thead>
+                  <tr class="border-b border-slate-200 text-slate-500 font-bold uppercase text-[11px]">
+                    <th class="py-2.5 px-3">Tipe / Ukuran (Lebar x Tinggi)</th>
+                    <th class="py-2.5 px-3">Tebal Dinding</th>
+                    <th class="py-2.5 px-3">Pilihan Cover</th>
+                    <th class="py-2.5 px-3">Aplikasi Proyek</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-slate-700">
+                  <tr class="hover:bg-slate-50/80">
+                    <td class="py-2.5 px-3 font-semibold text-[#0b1c3f]">U-Ditch 30 x 30 x 120 cm</td>
+                    <td class="py-2.5 px-3">6 cm</td>
+                    <td class="py-2.5 px-3">Light Duty / Heavy Duty</td>
+                    <td class="py-2.5 px-3">Drainase lingkungan, perumahan, gang</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/80">
+                    <td class="py-2.5 px-3 font-semibold text-[#0b1c3f]">U-Ditch 40 x 40 x 120 cm</td>
+                    <td class="py-2.5 px-3">7 cm</td>
+                    <td class="py-2.5 px-3">Light Duty / Heavy Duty</td>
+                    <td class="py-2.5 px-3">Saluran air pemukiman, ruko, jalan desa</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/80">
+                    <td class="py-2.5 px-3 font-semibold text-[#0b1c3f]">U-Ditch 50 x 50 x 120 cm</td>
+                    <td class="py-2.5 px-3">8 cm</td>
+                    <td class="py-2.5 px-3">Light Duty / Heavy Duty</td>
+                    <td class="py-2.5 px-3">Jalan perkotaan, area komersial</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/80">
+                    <td class="py-2.5 px-3 font-semibold text-[#0b1c3f]">U-Ditch 60 x 60 x 120 cm</td>
+                    <td class="py-2.5 px-3">9 cm</td>
+                    <td class="py-2.5 px-3">Heavy Duty (Truk / Tronton)</td>
+                    <td class="py-2.5 px-3">Jalan raya provinsi, pabrik, kawasan industri</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/80">
+                    <td class="py-2.5 px-3 font-semibold text-[#0b1c3f]">U-Ditch 80 x 80 s/d 120 x 140 cm</td>
+                    <td class="py-2.5 px-3">10 - 14 cm</td>
+                    <td class="py-2.5 px-3">Heavy Duty K-400</td>
+                    <td class="py-2.5 px-3">Drainase induk utama, jalan tol, jembatan</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="bg-slate-50 px-6 py-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+              <span class="text-xs text-slate-500">
+                *Ukuran custom atau pemesanan khusus proyek tender dapat disesuaikan.
+              </span>
+              <router-link
+                to="/produk/1"
+                class="inline-flex items-center gap-1.5 text-xs font-bold text-[#d21d1d] hover:text-[#b21818] no-underline"
+              >
+                Lihat Spesifikasi Lengkap U-Ditch &rarr;
+              </router-link>
+            </div>
+          </div>
+
+          <!-- FAQ Kontraktor & Pelanggan (Google Featured Snippet Booster) -->
+          <div>
+            <h3 class="text-base md:text-lg font-bold text-[#0b1c3f] mb-4">
+              Pertanyaan Seputar Pemesanan U-Ditch (FAQ)
+            </h3>
+            <div class="space-y-3">
+              <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-xs">
+                <h4 class="text-xs md:text-sm font-bold text-slate-800 mb-1">
+                  Bagaimana cara mendapatkan harga U-Ditch terbaik untuk proyek?
+                </h4>
+                <p class="text-xs text-slate-500 leading-relaxed">
+                  Anda dapat menghubungi Sales CITRACon via WhatsApp dengan menyebutkan ukuran yang dibutuhkan, total volume (pcs/meter), dan alamat pengiriman proyek. Tim kami akan segera menerbitkan Surat Penawaran Harga (SPH) resmi beserta kalkulasi ongkos kirim.
+                </p>
+              </div>
+              <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-xs">
+                <h4 class="text-xs md:text-sm font-bold text-slate-800 mb-1">
+                  Berapa minimal pemesanan U-Ditch beton precast?
+                </h4>
+                <p class="text-xs text-slate-500 leading-relaxed">
+                  CITRACon melayani pemesanan retail untuk perumahan hingga volume besar untuk kontraktor proyek pemerintah/swasta. Pengiriman disesuaikan dengan kapasitas rit armada logistik.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Project Portfolio Section -->
       <div id="galeri-kerja" class="mb-12">
         <div class="text-center max-w-2xl mx-auto mb-10">
