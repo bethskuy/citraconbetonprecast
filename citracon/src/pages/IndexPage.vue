@@ -368,10 +368,10 @@
             Pusat Penjualan & Pabrik Precast
           </div>
           <h2 class="text-2xl md:text-3xl font-extrabold text-[#0b1c3f] tracking-tight mb-4">
-            Jual U-Ditch Beton Precast & Saluran Drainase Mutu K-350 SNI
+            Jual U-Ditch Cikarang & Bekasi - Pabrik Beton Precast Mutu K-350 SNI
           </h2>
           <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-6">
-            CITRACon melayani penjualan <strong>U-Ditch beton precast</strong> (saluran air berbentuk U) dan <strong>Cover U-Ditch</strong> (Heavy Duty & Light Duty) berkualitas mutu tinggi standar SNI. Diproduksi menggunakan mesin berteknologi getar modern (dry cast / wet cast) dengan tulangan besi ulir kokoh, tahan terhadap beban kendaraan berat, banjir, dan tekanan tanah aktif.
+            CITRACon adalah pabrik produsen dan pusat <strong>jual U-Ditch di Cikarang, Bekasi, Karawang, dan Jabodetabek</strong>. Kami menyediakan <strong>saluran drainase beton U-Ditch</strong> dan <strong>Tutup Cover U-Ditch</strong> (Heavy Duty & Light Duty) berkualitas mutu K-350 hingga K-400 standar SNI dengan harga pabrik langsung siap antar ke proyek Anda.
           </p>
 
           <!-- Grid Keunggulan / Keyword SEO -->
